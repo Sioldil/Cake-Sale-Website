@@ -1,5 +1,5 @@
 <?php
-  include ($_SERVER['DOCUMENT_ROOT'] . "/sneat-1.0.0/inc/header.php");
+  include ($_SERVER['DOCUMENT_ROOT'] . "/admin/inc/header.php");
 ?>
           <!-- Content wrapper -->
           <div class="content-wrapper">
@@ -540,6 +540,6 @@
             </div>
             <!-- / Content -->
 <?php
-  include ($_SERVER["DOCUMENT_ROOT"] . '/sneat-1.0.0/inc/footer.php');
+  include ($_SERVER["DOCUMENT_ROOT"] . '/admin/inc/footer.php');
 ?>
             

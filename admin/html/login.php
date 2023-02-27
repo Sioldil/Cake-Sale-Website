@@ -1,5 +1,15 @@
 <?php
-  include ($_SERVER['DOCUMENT_ROOT'] . "/sneat-1.0.0/inc/auth_header.php"); 
+  include ($_SERVER['DOCUMENT_ROOT'] . "/admin/inc/auth_header.php"); 
+  include ($_SERVER['DOCUMENT_ROOT'] . "/admin/classes/admin_login.php");
+?>
+<?php
+  $class = new admin_login();
+  if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $Email = $_POST['Email'];
+    $Password = $_POST['Password'];
+
+    $login_check = $class -> login_admin($Email,$Password);
+  }
 ?>
   <body>
     <!-- Content -->
@@ -7,7 +17,7 @@
     <div class="container-xxl">
       <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="authentication-inner">
-          <!-- Register Card -->
+          <!-- Register -->
           <div class="card">
             <div class="card-body">
               <!-- Logo -->
@@ -68,65 +78,64 @@
                       </g>
                     </svg>
                   </span>
-                  <span class="app-brand-text demo text-body fw-bolder">Register</span>
+                  <span class="app-brand-text demo text-body fw-bolder">Login</span>
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">Adventure starts here 🚀</h4>
-              <p class="mb-4">Make your app management easy and fun!</p>
+              <h4 class="mb-2">Welcome to Sneat! 👋</h4>
+              <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
-              <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+              <form id="formAuthentication" class="mb-3" action="login.php" method="post">
                 <div class="mb-3">
-                  <label for="username" class="form-label">Username</label>
+                  <label for="email" class="form-label">Email</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="username"
-                    name="username"
-                    placeholder="Enter your username"
+                    id="email"
+                    name="Email"
+                    placeholder="Enter your email"
                     autofocus
                   />
                 </div>
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
-                  <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" />
-                </div>
                 <div class="mb-3 form-password-toggle">
-                  <label class="form-label" for="password">Password</label>
+                  <div class="d-flex justify-content-between">
+                    <label class="form-label" for="password">Password</label>
+                    <a href="auth-forgot-password-basic.html">
+                      <small>Forgot Password?</small>
+                    </a>
+                  </div>
                   <div class="input-group input-group-merge">
                     <input
                       type="password"
                       id="password"
                       class="form-control"
-                      name="password"
+                      name="Password"
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                       aria-describedby="password"
                     />
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                   </div>
                 </div>
-
                 <div class="mb-3">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
-                    <label class="form-check-label" for="terms-conditions">
-                      I agree to
-                      <a href="javascript:void(0);">privacy policy & terms</a>
-                    </label>
+                    <input class="form-check-input" type="checkbox" id="remember-me" />
+                    <label class="form-check-label" for="remember-me"> Remember Me </label>
                   </div>
                 </div>
-                <button class="btn btn-primary d-grid w-100">Sign up</button>
+                <div class="mb-3">
+                  <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                </div>
               </form>
 
               <p class="text-center">
-                <span>Already have an account?</span>
-                <a href="auth-login-basic.html">
-                  <span>Sign in instead</span>
+                <span>New on our platform?</span>
+                <a href="register.php">
+                  <span>Create an account</span>
                 </a>
               </p>
             </div>
           </div>
-          <!-- Register Card -->
+          <!-- /Register -->
         </div>
       </div>
     </div>
