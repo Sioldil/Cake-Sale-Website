@@ -1,6 +1,6 @@
 <?php
   include ($_SERVER['DOCUMENT_ROOT'] . "/admin/inc/auth_header.php"); 
-  include ($_SERVER['DOCUMENT_ROOT'] . "/admin/classes/admin_login.php");
+  include ($_SERVER['DOCUMENT_ROOT'] . "/classes/admin_login.php");
 ?>
 <?php
   $class = new admin_login();
