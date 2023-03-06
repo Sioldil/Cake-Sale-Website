@@ -3,9 +3,10 @@ include($_SERVER['DOCUMENT_ROOT'] . "/admin/inc/header.php");
 ?>
 <body>
   <!-- Layout wrapper -->
+
+      <!-- Menu -->
   <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
-      <!-- Menu -->
 
       <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
         <div class="app-brand demo">
@@ -369,6 +370,7 @@ include($_SERVER['DOCUMENT_ROOT'] . "/admin/inc/header.php");
           </li>
         </ul>
       </aside>
+    
       <!-- / Menu -->
 
       <!-- Layout container -->

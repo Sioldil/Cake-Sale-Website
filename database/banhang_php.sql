@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2023 at 05:56 PM
+-- Generation Time: Mar 04, 2023 at 03:46 AM
 -- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,31 +30,9 @@ SET time_zone = "+00:00";
 CREATE TABLE `accounts` (
   `AccountId` int(11) NOT NULL,
   `Username` int(11) NOT NULL,
-  `Email` char(100) NOT NULL,
-  `Password` char(255) NOT NULL
+  `Email` char(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Password` char(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admin`
---
-
-CREATE TABLE `admin` (
-  `Id` int(11) NOT NULL,
-  `Username` varchar(255) NOT NULL,
-  `Email` varchar(255) NOT NULL,
-  `Password` varchar(255) NOT NULL,
-  `Role` int(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
-
---
--- Dumping data for table `admin`
---
-
-INSERT INTO `admin` (`Id`, `Username`, `Email`, `Password`, `Role`) VALUES
-(1, 'Thang', 'Thang@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 1),
-(2, 'Thang', 'Thang1@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 2);
 
 -- --------------------------------------------------------
 
@@ -64,9 +42,8 @@ INSERT INTO `admin` (`Id`, `Username`, `Email`, `Password`, `Role`) VALUES
 
 CREATE TABLE `brands` (
   `BrandId` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Image` varchar(255) NOT NULL,
-  `Status` tinyint(4) NOT NULL
+  `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Image` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 -- --------------------------------------------------------
@@ -77,7 +54,7 @@ CREATE TABLE `brands` (
 
 CREATE TABLE `category` (
   `CategoryId` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL
+  `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
@@ -99,12 +76,10 @@ INSERT INTO `category` (`CategoryId`, `Name`) VALUES
 
 CREATE TABLE `customers` (
   `CustomerId` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
+  `Fullname` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Image` int(11) NOT NULL,
   `PhoneNumber` char(15) NOT NULL,
-  `Address` varchar(255) NOT NULL,
-  `Email` char(255) NOT NULL,
-  `Password` char(255) NOT NULL,
+  `Address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Status` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
@@ -146,8 +121,8 @@ CREATE TABLE `orderdetails` (
 
 CREATE TABLE `products` (
   `ProductId` int(11) NOT NULL,
-  `Name` int(11) NOT NULL,
-  `Image` int(11) NOT NULL,
+  `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Image` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Quantity` int(11) NOT NULL,
   `Description` int(11) NOT NULL,
   `BuyPrice` float NOT NULL,
@@ -179,8 +154,8 @@ CREATE TABLE `receipts` (
 
 CREATE TABLE `roles` (
   `RoleId` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Description` varchar(255) NOT NULL
+  `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
@@ -200,13 +175,6 @@ INSERT INTO `roles` (`RoleId`, `Name`, `Description`) VALUES
 --
 ALTER TABLE `accounts`
   ADD PRIMARY KEY (`AccountId`);
-
---
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`Id`),
-  ADD KEY `Role` (`Role`);
 
 --
 -- Indexes for table `brands`
@@ -272,12 +240,6 @@ ALTER TABLE `accounts`
   MODIFY `AccountId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `admin`
---
-ALTER TABLE `admin`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
@@ -322,12 +284,6 @@ ALTER TABLE `roles`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `admin`
---
-ALTER TABLE `admin`
-  ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`Role`) REFERENCES `roles` (`RoleId`);
 
 --
 -- Constraints for table `oders`
