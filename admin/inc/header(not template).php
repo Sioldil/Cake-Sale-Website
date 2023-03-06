@@ -1,5 +1,5 @@
 <?php
-include($_SERVER['DOCUMENT_ROOT'] . "/lib/session.php");
+  include($_SERVER['DOCUMENT_ROOT'] . "/lib/session.php");
 Session::checkSession();
 ?>
 <?php
@@ -54,5 +54,17 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
   <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="../assets/js/config.js"></script>
+
+  <script>
+    document.querySelectorAll(".menu-item").forEach((ele) =>
+    ele.addEventListener("click", function (event) {
+    event.preventDefault();
+    document
+      .querySelectorAll(".menu-item")
+      .forEach((ele) => ele.classList.remove("active"));
+    this.classList.add("active")
+  })
+);
+  </script>
 </head>
 
