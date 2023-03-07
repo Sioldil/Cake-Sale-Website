@@ -70,8 +70,11 @@ class Brands
 
 
     //Cập nhật thông tin thương hiệu
-    public function update_Brands()
+    public function get_Brand_By_Id($id)
     {
+        $query = "SELECT *FROM Brands where BrandId = '$id' order by BrandId desc";
+        $result = $this->db->select($query);
+        return $result;
     }
 
 
