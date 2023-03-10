@@ -140,7 +140,7 @@
                       ?>
                       <tr>
                         <td><i class="fab fa-angular fa-lg text-danger"></i> <strong><?php echo $i ?></strong></td>
-                        <td><?php echo $result['Name'] ?></td>
+                        <td><?php echo $result['CategoryName'] ?></td>
                         <td>
                           <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

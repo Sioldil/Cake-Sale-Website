@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
       $file_tmp = $_FILES['photo']['tmp_name'];
       move_uploaded_file($file_tmp,"..//uploads//".$file_name);
     
-      $query = "INSERT INTO Brands(BrandName,Image) Value('$name','$file_name')";
+      $query = "INSERT INTO Brands(Name,Image) Value('$name','$file_name')";
       $data = mysqli_query($conn, $query);
     
       if ($data) {
