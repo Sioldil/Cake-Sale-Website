@@ -29,11 +29,10 @@ include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
             foreach ($Brands as $key => $value) : ?>
               <tr>
                 <td><?php echo $key + 1 ?></td>
-                <td><?php echo $value['Name'] ?></td>
+                <td><?php echo $value['BrandName'] ?></td>
                 <td>
                   <img src="..//uploads//<?php echo $value['Image']?>" alt="" width="80">
                 </td>
-                <td><?php echo $value['Image'] ?></td>
                 <td>
                   <button type="button" class="btn btn-primary">
                     <a style="color: white" ; href="brand_update.php?id=<?php echo $value['BrandId'] ?>">Sửa</a>

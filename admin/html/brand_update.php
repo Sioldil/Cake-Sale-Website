@@ -2,8 +2,6 @@
 include($_SERVER["DOCUMENT_ROOT"] . '/admin/inc/header(not template).php');
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
-echo $_GET['id'];
-
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
   
@@ -18,7 +16,7 @@ if (isset($_GET['id'])) {
   if(isset($_POST['name'])){
     $name = $_POST['name'];
 
-    $query = "UPDATE Brands set Name='$name' where BrandId='$id'";
+    $query = "UPDATE Brands set BrandName='$name' where BrandId='$id'";
     $update = mysqli_query($conn, $query);
 
     if($update){
@@ -42,11 +40,14 @@ if (isset($_GET['id'])) {
                         <form method="POST" enctype="multipart/form">
                             <div class="mb-3">
                                 <label class="form-label" for="name">Tên thương hiệu</label>
-                                <input type="text" class="form-control" id="name" name="name" value="<?php echo $brand['Name'] ?>"/>
+                                <input type="text" class="form-control" id="name" name="name" value="<?php echo $brand['BrandName'] ?>"/>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="image">Hình ảnh</label>
-                                <input type="file" class="form-control" id="image" name="image"  value="<?php echo $brand['Image'] ?>"/>
+                                <div class="form-group">
+                                    <label class="form-label" for="image">Hình ảnh</label>
+                                    <input type="file" class="form-control mb-4" id="image" name="image"/>
+                                    <img src="..//uploads//<?php echo $brand['Image']?>" alt="" width="250">
+                                </div>
                             </div>
                             <button type="submit" name='submit' class="btn btn-primary">Lưu</button>
                         </form>
