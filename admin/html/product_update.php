@@ -2,25 +2,30 @@
 include($_SERVER["DOCUMENT_ROOT"] . '/admin/inc/header(not template).php');
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
-$sql = "SELECT * FROM category";
-$categorys = mysqli_query($conn, $sql);
-
-$sql = "SELECT * FROM brands";
-$brands = mysqli_query($conn, $sql);
-
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-  
-    $query ="SELECT * FROM Products Where ProductId = '$id'";
-  
+
+
+    $sql1 = "SELECT * FROM category";
+    $categorys = mysqli_query($conn, $sql1);
+
+    $sql2 = "SELECT * FROM brands";
+    $brands = mysqli_query($conn, $sql2);
+
+    $query = "SELECT * FROM Products Where ProductId = '$id'";
+
     $data = mysqli_query($conn, $query);
-  
+
     $product = mysqli_fetch_assoc($data);
 }
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (isset($_POST['submit'])){
+
+    $sql = "SELECT Image from products where ProductId = '$id'";
+    $image_name = mysqli_query($conn,$sql);
+
     $name = $_POST['name'];
     $id_brands = $_POST['id_brands'];
     $id_categories = $_POST['id_categories'];
@@ -29,22 +34,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $quantity = $_POST['quantity'];
     $status = $_POST['status'];
     $description = $_POST['description'];
+    $id_categories = $_POST['id_categories'];
+    $id_brands = $_POST['id_brands'];
 
-    if (isset($_FILES['photo'])) {
-        $file_name =  time() . '_' . $_FILES['photo']['name'];
-        $file_tmp = $_FILES['photo']['tmp_name'];
-        move_uploaded_file($file_tmp, "..//uploads//" . $file_name);
+    if (isset($_FILES['image'])) {
 
-        $query = "UPDATE Products set Name='$name', where ProductId='$id'";
-        $update = mysqli_query($conn, $query);
+        $file_name = $_FILES['image']['name'];
+        $file_tmp = $_FILES['image']['tmp_name'];
+
+        $div = explode('.',$file_name);
+        $file_ext = strtolower(end($div));
+        $unique_image = substr(md5(time()),0,10).'.'.$file_name;
+
+
+        move_uploaded_file($file_tmp, "..//uploads//" . $unique_image);
+
+        //Kiểm tra người dùng chọn file hay chưa
+            if(!empty($file_name)){
+                $query = "UPDATE `products` SET `Name`='$name',`Image`='$unique_image',`Quantity`='$quantity',`Description`='$description',
+                `BuyPrice`='$buy_price',`SellPrice`='$sell_price',`Status`='$status',`CategoriId`='$id_categories',`BrandId`='$id_brands' WHERE ProductId = '$id'";
+                 $update = mysqli_query($conn, $query);
+            }
+            else{
+                //Kiểm tra người dùng chọn file hay chưa
+                $query = "UPDATE `products` SET `Name`='$name',`Quantity`='$quantity',`Description`='$description',
+                 `BuyPrice`='$buy_price',`SellPrice`='$sell_price',`Status`='$status',`CategoriId`='$id_categories',`BrandId`='$id_brands' WHERE ProductId = '$id'";
+                $update = mysqli_query($conn, $query);
+            }
 
         if ($update) {
-            header("location:product_list.php");
+           header("location:product_list.php");
         } else {
             echo "Xảy ra lỗi khi thêm mới";
         }
-    }
+    } 
 }
+
+
 
 ?>
 
@@ -57,18 +83,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="col-xl">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <form action="product_add.php" method="POST" enctype="multipart/form-data">
+                        <form method="POST" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label class="form-label" for="name">Tên sản phẩm</label>
-                                <input type="text" class="form-control" id="name" name="name" value="<?php echo $product['Name']?>" placeholder="Bánh kem Le Castella" required />
+                                <input type="text" class="form-control" id="name" name="name" value="<?php echo $product['Name'] ?>" placeholder="Bánh kem Le Castella" required />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Thương hiệu</label>
                                 <select name="id_brands" class="form-control" id="">
                                     <option value="">--------------Loại thương hiệu--------------</option>
                                     <?php foreach ($brands as $key => $value) { ?>
-                                        <option value="<?php echo $value["BrandId"] ?>"
-                                        <?php echo (($value['BrandId'] == $product['BrandId']) ? 'selected' : '') ?>>
+                                        <option value="<?php echo $value["BrandId"] ?>" <?php echo (($value['BrandId'] == $product['BrandId']) ? 'selected' : '') ?>>
                                             <?php echo $value["BrandName"] ?>
                                         </option>
                                     <?php } ?>
@@ -79,8 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <select name="id_categories" class="form-control" id="">
                                     <option value="">--------------Loại bánh--------------</option>
                                     <?php foreach ($categorys as  $key => $value) { ?>
-                                        <option value="<?php echo $value["CategoryId"] ?>"
-                                        <?php echo (($value['CategoryId'] == $product['CategoriId']) ? 'selected' : '') ?>>
+                                        <option value="<?php echo $value["CategoryId"] ?>" <?php echo (($value['CategoryId'] == $product['CategoriId']) ? 'selected' : '') ?>>
                                             <?php echo $value["CategoryName"] ?>
                                         </option>
                                     <?php } ?>
@@ -88,24 +112,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Hình ảnh</label>
-                                <input type="file" class="form-control mb-4" id="image" name="image"  value="<?php echo $product['Image'] ?>" required/>
-                                <img src="..//uploads//<?php echo $product['Image']?>" alt="" width="250">
+                                <input type="file" class="form-control mb-4" id="image" name="image" value="<?php echo $product['Image'] ?>" />
+                                <img src="..//uploads//<?php echo $product['Image'] ?>" alt="" width="250">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Mô tả</label>
-                                <input type="text" class="form-control" name="description" value="<?php echo $product['Description']?>" required />
+                                <input type="text" class="form-control" name="description" value="<?php echo $product['Description'] ?>" required />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Giá nhập</label>
-                                <input type="text" class="form-control" name="buy_price" value="<?php echo $product['BuyPrice']?>" required />
+                                <input type="text" class="form-control" name="buy_price" value="<?php echo $product['BuyPrice'] ?>" required />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Giá bán</label>
-                                <input type="text" class="form-control" name="sell_price" value="<?php echo $product['SellPrice']?> "required />
+                                <input type="text" class="form-control" name="sell_price" value="<?php echo $product['SellPrice'] ?> " required />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Số lượng</label>
-                                <input type="text" class="form-control" name="quantity" value="<?php echo $product['Quantity']?> "required />
+                                <input type="text" class="form-control" name="quantity" value="<?php echo $product['Quantity'] ?> " required />
                             </div>
                             <div class="mp-3">
                                 <label class="form-label">Trạng thái</label>
@@ -120,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     Ẩn
                                 </label>
                             </div>
-                            <button type="submit" class="btn btn-primary mt-4">Lưu</button>
+                            <button type="submit" name="submit" class="btn btn-primary mt-4">Sửa</button>
                         </form>
                     </div>
                 </div>
