@@ -13,37 +13,36 @@ if (isset($_GET['id'])) {
 }
 
 
-if (isset($_POST['name'])) {
+if (isset($_POST['submit'])) {
 
     $name = $_POST['name'];
 
     if (isset($_FILES['image'])) {
         $file_name = $_FILES['image']['name'];
         $file_tmp = $_FILES['image']['tmp_name'];
+        $file_size = $_FILES['image']['size'];
 
         $div = explode('.', $file_name);
         $file_ext = strtolower(end($div));
         $unique_image = substr(md5(time()), 0, 10) . '.' . $file_name;
 
-
         move_uploaded_file($file_tmp, "..//uploads//" . $unique_image);
 
         if (!empty($file_name)) {
+            $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
+            $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+            if(!array_key_exists($ext, $allowed)){
+                die("Lỗi: Vui lòng chọn định dạng tệp hợp lệ.)");
+            }
+            else if($file_size > 5120){
+                die("Lỗi kích thước tệp lớn hơn giới hạn cho phép (Chọn tệp < 5mb)");
+            }
             $query = "UPDATE Brands set BrandName='$name', Image='$unique_image' where BrandId='$id'";
             $update = mysqli_query($conn, $query);
         } else {
             $query = "UPDATE Brands set BrandName='$name' where BrandId='$id'";
             $update = mysqli_query($conn, $query);
         }
-        if ($update) {
-            header('location: brand_list.php');
-        } else {
-            echo "Có lỗi khi cập nhật thương hiệu";
-        }
-    } else {
-        $query = "UPDATE Brands set BrandName='$name' where BrandId='$id'";
-        $update = mysqli_query($conn, $query);
-
         if ($update) {
             header('location: brand_list.php');
         } else {

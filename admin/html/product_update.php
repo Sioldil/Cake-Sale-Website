@@ -51,15 +51,23 @@ if (isset($_POST['submit'])){
 
         //Kiểm tra người dùng chọn file hay chưa
             if(!empty($file_name)){
-                $query = "UPDATE `products` SET `Name`='$name',`Image`='$unique_image',`Quantity`='$quantity',`Description`='$description',
-                `BuyPrice`='$buy_price',`SellPrice`='$sell_price',`Status`='$status',`CategoriId`='$id_categories',`BrandId`='$id_brands' WHERE ProductId = '$id'";
-                 $update = mysqli_query($conn, $query);
+                $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
+                $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+                if(!array_key_exists($ext, $allowed)){
+                    die("Lỗi: Vui lòng chọn định dạng tệp hợp lệ.)");
+                }
+                else if($file_size > 5120){
+                    die("Lỗi kích thước tệp lớn hơn giới hạn cho phép (Chọn tệp < 5mb)");
+                }
+                $query =  "UPDATE `products` SET `Name`='$name',`Image`='$unique_image',`Quantity`='$quantity',`Description`='$description',
+                          `BuyPrice`='$buy_price',`SellPrice`='$sell_price',`Status`='$status',`CategoriId`='$id_categories',`BrandId`='$id_brands' WHERE ProductId = '$id'";
+                          $update = mysqli_query($conn, $query);
             }
             else{
                 //Kiểm tra người dùng chọn file hay chưa
                 $query = "UPDATE `products` SET `Name`='$name',`Quantity`='$quantity',`Description`='$description',
-                 `BuyPrice`='$buy_price',`SellPrice`='$sell_price',`Status`='$status',`CategoriId`='$id_categories',`BrandId`='$id_brands' WHERE ProductId = '$id'";
-                $update = mysqli_query($conn, $query);
+                         `BuyPrice`='$buy_price',`SellPrice`='$sell_price',`Status`='$status',`CategoriId`='$id_categories',`BrandId`='$id_brands' WHERE ProductId = '$id'";
+                         $update = mysqli_query($conn, $query);
             }
 
         if ($update) {
