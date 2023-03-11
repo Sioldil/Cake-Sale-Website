@@ -30,20 +30,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status = $_POST['status'];
     $description = $_POST['description'];
 
-    // if (isset($_FILES['photo'])) {
-    //     $file_name =  time() . '_' . $_FILES['photo']['name'];
-    //     $file_tmp = $_FILES['photo']['tmp_name'];
-    //     move_uploaded_file($file_tmp, "..//uploads//" . $file_name);
+    if (isset($_FILES['photo'])) {
+        $file_name =  time() . '_' . $_FILES['photo']['name'];
+        $file_tmp = $_FILES['photo']['tmp_name'];
+        move_uploaded_file($file_tmp, "..//uploads//" . $file_name);
 
-    //     $query = "UPDATE Brands set Name='$name' where BrandId='$id'";
-    //     $update = mysqli_query($conn, $query);
+        $query = "UPDATE Products set Name='$name', where ProductId='$id'";
+        $update = mysqli_query($conn, $query);
 
-    //     if ($update) {
-    //         header("location:product_list.php");
-    //     } else {
-    //         echo "Xảy ra lỗi khi thêm mới";
-    //     }
-    // }
+        if ($update) {
+            header("location:product_list.php");
+        } else {
+            echo "Xảy ra lỗi khi thêm mới";
+        }
+    }
 }
 
 ?>
