@@ -29,14 +29,14 @@ if (isset($_POST['submit'])) {
         move_uploaded_file($file_tmp, "..//uploads//" . $unique_image);
 
         if (!empty($file_name)) {
-            $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
-            $ext = pathinfo($file_name, PATHINFO_EXTENSION);
-            if(!array_key_exists($ext, $allowed)){
-                die("Lỗi: Vui lòng chọn định dạng tệp hợp lệ.)");
-            }
-            else if($file_size > 5120){
-                die("Lỗi kích thước tệp lớn hơn giới hạn cho phép (Chọn tệp < 5mb)");
-            }
+            // $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
+            // $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+            // if(!array_key_exists($ext, $allowed)){
+            //     die("Lỗi: Vui lòng chọn định dạng tệp hợp lệ.)");
+            // }
+            // else if($file_size > 5120){
+            //     die("Lỗi kích thước tệp lớn hơn giới hạn cho phép (Chọn tệp < 5mb)");
+            // }
             $query = "UPDATE Brands set BrandName='$name', Image='$unique_image' where BrandId='$id'";
             $update = mysqli_query($conn, $query);
         } else {
@@ -71,10 +71,10 @@ if (isset($_POST['submit'])) {
                                 <div class="form-group">
                                     <label class="form-label" for="image">Hình ảnh</label>
                                     <input type="file" class="form-control mb-4" id="image" name="image" />
-                                    <img src="..//uploads//<?php echo $brand['Image'] ?>" alt="" width="250">
+                                    <img src="..//uploads//<?php echo $brand['Image'] ?>" alt="" width="150">
                                 </div>
                             </div>
-                            <button type="submit" name='submit' class="btn btn-primary">Lưu</button>
+                            <button type="submit" name='submit' class="btn btn-success">Lưu</button>
                         </form>
                     </div>
                 </div>

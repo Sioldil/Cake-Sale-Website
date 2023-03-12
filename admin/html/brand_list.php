@@ -31,7 +31,7 @@ include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
                 <td><?php echo $key + 1 ?></td>
                 <td><?php echo $value['BrandName'] ?></td>
                 <td>
-                  <img src="..//uploads//<?php echo $value['Image']?>" alt="" width="80">
+                  <img src="..//uploads//<?php echo $value['Image']?>" alt="" width="100">
                 </td>
                 <td>
                   <button type="button" class="btn btn-primary">
@@ -49,7 +49,7 @@ include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
       </div>
     </div>
     <div class="mt-4">
-      <button type="button" class="btn btn-info">
+      <button type="button" class="btn btn-success">
         <a style="color: white" ; href="brand_add.php">Thêm Mới</a>
       </button>
     </div>
