@@ -1,5 +1,11 @@
 <?php
 include($_SERVER['DOCUMENT_ROOT'] . "/cake-main/inc/header.php");
+
+include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
+
+$query = "SELECT *FROM Products where status = 1";
+$Products = mysqli_query($conn, $query);
+
 ?>
 <!-- Hero Section Begin -->
 <section class="hero">
@@ -77,7 +83,7 @@ include($_SERVER['DOCUMENT_ROOT'] . "/cake-main/inc/header.php");
 <!-- About Section End -->
 
 <!-- Categories Section Begin -->
-<div class="categories">
+<!-- <div class="categories">
     <div class="container">
         <div class="row">
             <div class="categories__slider owl-carousel">
@@ -120,250 +126,44 @@ include($_SERVER['DOCUMENT_ROOT'] . "/cake-main/inc/header.php");
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- Categories Section End -->
-
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <div class="section-title">
+                <span>Sản Phẩm Nổi Bật</span>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Product Section Begin -->
 <section class="product spad">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/shop/product-1.jpg">
-                        <div class="product__label">
-                            <span>Cupcake</span>
+            <?php foreach ($Products as $key => $value) : ?>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg">
+                            <a href="product_detail.php">
+                                <img src="..//admin//uploads//<?php echo $value['Image'] ?>" alt="Chi tiết sản phẩm">
+                            </a>
+                            <div class="product__label">
+                                <!-- <span>Cupcake</span> -->
+                            </div>
                         </div>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Dozen Cupcakes</a></h6>
-                        <div class="product__item__price">$32.00</div>
-                        <div class="cart_add">
-                            <a href="#">Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/shop/product-2.jpg">
-                        <div class="product__label">
-                            <span>Cupcake</span>
-                        </div>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Cookies and Cream</a></h6>
-                        <div class="product__item__price">$30.00</div>
-                        <div class="cart_add">
-                            <a href="#">Add to cart</a>
+                        <div class="product__item__text">
+                            <h6><a href="product_detail.php"><?php echo $value['Name'] ?></a></h6>
+                            <h5>Giá <?php echo $value['SellPrice'] . ' $USD' ?></h5>
+                            <div>
+                                <button class="btn btn-primary mt-4">
+                                    <a style="color: white" href="cart_add.php">Thêm giỏ hàng</a>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/shop/product-3.jpg">
-                        <div class="product__label">
-                            <span>Cupcake</span>
-                        </div>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Gluten Free Mini Dozen</a></h6>
-                        <div class="product__item__price">$31.00</div>
-                        <div class="cart_add">
-                            <a href="#">Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/shop/product-4.jpg">
-                        <div class="product__label">
-                            <span>Cupcake</span>
-                        </div>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Cookie Dough</a></h6>
-                        <div class="product__item__price">$25.00</div>
-                        <div class="cart_add">
-                            <a href="#">Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/shop/product-5.jpg">
-                        <div class="product__label">
-                            <span>Cupcake</span>
-                        </div>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Vanilla Salted Caramel</a></h6>
-                        <div class="product__item__price">$05.00</div>
-                        <div class="cart_add">
-                            <a href="#">Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/shop/product-6.jpg">
-                        <div class="product__label">
-                            <span>Cupcake</span>
-                        </div>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">German Chocolate</a></h6>
-                        <div class="product__item__price">$14.00</div>
-                        <div class="cart_add">
-                            <a href="#">Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/shop/product-7.jpg">
-                        <div class="product__label">
-                            <span>Cupcake</span>
-                        </div>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Dulce De Leche</a></h6>
-                        <div class="product__item__price">$32.00</div>
-                        <div class="cart_add">
-                            <a href="#">Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/shop/product-8.jpg">
-                        <div class="product__label">
-                            <span>Cupcake</span>
-                        </div>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Mississippi Mud</a></h6>
-                        <div class="product__item__price">$08.00</div>
-                        <div class="cart_add">
-                            <a href="#">Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Product Section End -->
-
-<!-- Class Section Begin -->
-<section class="class spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="class__form">
-                    <div class="section-title">
-                        <span>Class cakes</span>
-                        <h2>Made from your <br />own hands</h2>
-                    </div>
-                    <form action="#">
-                        <input type="text" placeholder="Name">
-                        <input type="text" placeholder="Phone">
-                        <select>
-                            <option value="">Studying Class</option>
-                            <option value="">Writting Class</option>
-                            <option value="">Reading Class</option>
-                        </select>
-                        <input type="text" placeholder="Type your requirements">
-                        <button type="submit" class="site-btn">registration</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="class__video set-bg" data-setbg="img/class-video.jpg">
-            <a href="https://www.youtube.com/watch?v=8PJ3_p7VqHw&list=RD8PJ3_p7VqHw&start_radio=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
-        </div>
-    </div>
-</section>
-<!-- Class Section End -->
-
-<!-- Team Section Begin -->
-<section class="team spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7 col-md-7 col-sm-7">
-                <div class="section-title">
-                    <span>Our team</span>
-                    <h2>Sweet Baker </h2>
-                </div>
-            </div>
-            <div class="col-lg-5 col-md-5 col-sm-5">
-                <div class="team__btn">
-                    <a href="#" class="primary-btn">Join Us</a>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="team__item set-bg" data-setbg="img/team/team-1.jpg">
-                    <div class="team__item__text">
-                        <h6>Randy Butler</h6>
-                        <span>Decorater</span>
-                        <div class="team__item__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="team__item set-bg" data-setbg="img/team/team-2.jpg">
-                    <div class="team__item__text">
-                        <h6>Randy Butler</h6>
-                        <span>Decorater</span>
-                        <div class="team__item__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="team__item set-bg" data-setbg="img/team/team-3.jpg">
-                    <div class="team__item__text">
-                        <h6>Randy Butler</h6>
-                        <span>Decorater</span>
-                        <div class="team__item__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="team__item set-bg" data-setbg="img/team/team-4.jpg">
-                    <div class="team__item__text">
-                        <h6>Randy Butler</h6>
-                        <span>Decorater</span>
-                        <div class="team__item__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
