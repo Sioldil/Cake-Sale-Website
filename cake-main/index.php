@@ -3,8 +3,9 @@ include($_SERVER['DOCUMENT_ROOT'] . "/cake-main/inc/header.php");
 
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
-$query = "SELECT *FROM Products where status = 1";
-$Products = mysqli_query($conn, $query);
+    $query = "SELECT *FROM Products where status = 1";
+    $Products = mysqli_query($conn, $query);
+
 
 ?>
 <!-- Hero Section Begin -->
@@ -145,7 +146,7 @@ $Products = mysqli_query($conn, $query);
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="product__item">
                         <div class="product__item__pic set-bg">
-                            <a href="product_detail.php">
+                            <a href="product_detail.php?id=<?php echo $value['ProductId'] ?> ">
                                 <img src="..//admin//uploads//<?php echo $value['Image'] ?>" alt="Chi tiết sản phẩm">
                             </a>
                             <div class="product__label">
@@ -153,10 +154,10 @@ $Products = mysqli_query($conn, $query);
                             </div>
                         </div>
                         <div class="product__item__text">
-                            <h6><a href="product_detail.php"><?php echo $value['Name'] ?></a></h6>
+                            <h6> <a href="product_detail.php?id=<?php echo $value['ProductId'] ?>"><?php echo $value['Name'] ?></a></h6>
                             <h5>Giá <?php echo $value['SellPrice'] . ' $USD' ?></h5>
                             <div>
-                                <button class="btn btn-primary mt-4">
+                                <button class="btn primary-btn mt-4">
                                     <a style="color: white" href="cart_add.php">Thêm giỏ hàng</a>
                                 </button>
                             </div>
