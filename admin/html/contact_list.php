@@ -2,15 +2,15 @@
 include($_SERVER["DOCUMENT_ROOT"] . '/admin/inc/header(not template).php');
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
-  $query = "SELECT * FROM Brands";
-  $Brands = mysqli_query($conn, $query);
+  $query = "SELECT * FROM Contacts";
+  $Contacts = mysqli_query($conn, $query);
 
 ?>
 
 <div class="content-wrapper">
   <!-- Content -->
   <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4">Thương hiệu bánh</h4>
+    <h4 class="fw-bold py-3 mb-4">Danh sách phản hồi</h4>
 
     <!-- Basic Bootstrap Table -->
     <div class="card">
@@ -19,26 +19,23 @@ include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
           <thead>
             <tr>
               <th>STT</th>
-              <th>Tên thương hiệu</th>
-              <th>Hình ảnh</th>
+              <th>Tên người dùng</th>
+              <th>Email</th>
+              <th>Nội dung</th>
               <th>Chức năng</th>
             </tr>
           </thead>
           <tbody class="table-border-bottom-0">
             <?php
-            foreach ($Brands as $key => $value) : ?>
+            foreach ($Contacts as $key => $value) : ?>
               <tr>
                 <td><?php echo $key + 1 ?></td>
-                <td><?php echo $value['BrandName'] ?></td>
+                <td><?php echo $value['UserName'] ?></td>
+                <td><?php echo $value['Email'] ?></td>
+                <td><?php echo $value['Message'] ?></td>
                 <td>
-                  <img src="..//uploads//<?php echo $value['Image']?>" alt="" width="100">
-                </td>
-                <td>
-                  <button type="button" class="btn btn-primary">
-                    <a style="color: white" ; href="brand_update.php?id=<?php echo $value['BrandId'] ?>">Sửa</a>
-                  </button>
                   <button type="button" class="btn btn-danger">
-                    <a style="color: white" ; href="brand_delete.php?id=<?php echo $value['BrandId'] ?>" 
+                    <a style="color: white"; href="contact_delete.php?id=<?php echo $value['ContactId'] ?>" 
                     onclick="return confirm('Bạn có chắc chắn xóa ?')">Xóa</a>
                   </button>
                 </td>
@@ -47,11 +44,6 @@ include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
           </tbody>
         </table>
       </div>
-    </div>
-    <div class="mt-4">
-      <button type="button" class="btn btn-success">
-        <a style="color: white" ; href="brand_add.php">Thêm Mới</a>
-      </button>
     </div>
   </div>
 </div>

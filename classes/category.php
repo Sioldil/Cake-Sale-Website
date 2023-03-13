@@ -24,12 +24,12 @@ class Category
             $alert = "Category can't be empty";
             return $alert;
         } else {
-            $check_cate = "SELECT * FROM category WHERE Name='$cate_name' LIMIT 1";
+            $check_cate = "SELECT * FROM category WHERE CategoryName='$cate_name' LIMIT 1";
             $result_check = $this->db->select($check_cate);
             if ($result_check) {
                 $alert = "<span class = 'error'>Category already existed</span>";
             } else {
-                $query = "INSERT INTO category(Name) VALUES('$cate_name')";
+                $query = "INSERT INTO category(CategoryName) VALUES('$cate_name')";
                 $result = $this->db->insert($query);
                 if ($result) {
                     $alert = "<span class='sucsess'>Insert category successfully</span>";
