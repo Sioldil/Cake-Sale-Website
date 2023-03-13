@@ -1,5 +1,5 @@
 <?php
-    include($_SERVER['DOCUMENT_ROOT'] . "/admin/inc/header(not template).php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/admin/inc/header.php");
     include($_SERVER['DOCUMENT_ROOT'] . "/admin/inc/navbar.php");
     include($_SERVER['DOCUMENT_ROOT'] . "/classes/category.php");
 ?>
