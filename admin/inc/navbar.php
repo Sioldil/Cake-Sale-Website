@@ -68,7 +68,7 @@
             </a>  
           </li>
           <li class="menu-item">
-            <a href="brand_list.php" class="menu-link">
+            <a href="brand_list.php?page=1" class="menu-link">
               <i class="menu-icon tf-icons bx bx-collection"></i>
               <div data-i18n="Basic">Brands</div>
             </a>
