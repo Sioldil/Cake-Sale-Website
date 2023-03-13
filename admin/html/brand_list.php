@@ -19,7 +19,7 @@ $start = ($cr_page - 1) * $limit;
 
 $query2 = "SELECT * FROM Brands LIMIT $start,$limit";
 
-$Products = mysqli_query($conn, $query2);
+$Brands = mysqli_query($conn, $query2);
 
 ?>
 <div class="layout-page">
@@ -164,17 +164,17 @@ $Products = mysqli_query($conn, $query2);
             if($cr_page - 1 > 0) {
           ?> 
           <li class="page-item first">
-            <a class="page-link" href="product_list.php?page=1"><i class="tf-icon bx bx-chevrons-left"></i></a>
+            <a class="page-link" href="brand_list.php?page=1"><i class="tf-icon bx bx-chevrons-left"></i></a>
           </li>
           <li class="page-item prev">
-            <a class="page-link" href="product_list.php?page=<?php echo $cr_page - 1 ?>"><i class="tf-icon bx bx-chevron-left"></i></a>
+            <a class="page-link" href="brand_list.php?page=<?php echo $cr_page - 1 ?>"><i class="tf-icon bx bx-chevron-left"></i></a>
           </li>
           <?php 
             } 
           ?>
           <?php for($i=1; $i <= $page ; $i++) {?> 
           <li class="page-item  <?php echo (($cr_page == $i)? 'active' : '') ?>">
-            <a class="page-link" href="product_list.php?page=<?php echo $i ?>"><?php echo $i ?></a>
+            <a class="page-link" href="brand_list.php?page=<?php echo $i ?>"><?php echo $i ?></a>
           </li>
           <?php 
             } 
@@ -184,10 +184,10 @@ $Products = mysqli_query($conn, $query2);
             if($cr_page + 1 <= $page) {
           ?> 
           <li class="page-item next">
-            <a class="page-link" href="product_list.php?page=<?php echo $cr_page + 1 ?>"><i class="tf-icon bx bx-chevron-right"></i></a>
+            <a class="page-link" href="brand_list.php?page=<?php echo $cr_page + 1 ?>"><i class="tf-icon bx bx-chevron-right"></i></a>
           </li>
           <li class="page-item last">
-            <a class="page-link" href="product_list.php?page=<?php echo $page ?>"><i class="tf-icon bx bx-chevrons-right"></i></a>
+            <a class="page-link" href="brand_list.php?page=<?php echo $page ?>"><i class="tf-icon bx bx-chevrons-right"></i></a>
           </li>
           <?php
             }
