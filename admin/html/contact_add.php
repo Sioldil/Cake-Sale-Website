@@ -1,5 +1,5 @@
 <?php
-include($_SERVER["DOCUMENT_ROOT"] . '/admin/inc/header(not template).php');
+include($_SERVER['DOCUMENT_ROOT'] . "/admin/inc/header.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

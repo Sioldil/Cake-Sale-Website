@@ -3,11 +3,11 @@ include($_SERVER["DOCUMENT_ROOT"] . '/admin/inc/header.php');
 include($_SERVER['DOCUMENT_ROOT'] . "/admin/inc/navbar.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
-$query = "SELECT * FROM Brands";
+$query = "SELECT * FROM Category where status = 1";
 
-$Brands = mysqli_query($conn, $query);
+$Category1 = mysqli_query($conn, $query);
 
-$total = mysqli_num_rows($Brands);
+$total = mysqli_num_rows($Category1);
 
 $limit = 5;
 
@@ -17,11 +17,12 @@ $cr_page = (isset($_GET['page']) ? $_GET['page'] : 1);
 
 $start = ($cr_page - 1) * $limit;
 
-$query2 = "SELECT * FROM Brands LIMIT $start,$limit";
+$query2 = "SELECT * FROM Category LIMIT $start,$limit";
 
-$Brands = mysqli_query($conn, $query2);
+$Category = mysqli_query($conn, $query2);
 
 ?>
+
 <div class="layout-page">
   <!-- Navbar -->
 
@@ -114,7 +115,7 @@ $Brands = mysqli_query($conn, $query2);
   <div class="content-wrapper">
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
-      <h4 class="fw-bold py-3 mb-4">Thương hiệu bánh</h4>
+      <h4 class="fw-bold py-3 mb-4">Loại bánh</h4>
 
       <!-- Basic Bootstrap Table -->
       <div class="card">
@@ -123,26 +124,22 @@ $Brands = mysqli_query($conn, $query2);
             <thead>
               <tr>
                 <th>STT</th>
-                <th>Tên thương hiệu</th>
-                <th>Hình ảnh</th>
+                <th>Tên Loại</th>
                 <th>Chức năng</th>
               </tr>
             </thead>
             <tbody class="table-border-bottom-0">
               <?php
-              foreach ($Brands as $key => $value) : ?>
+              foreach ($Category1 as $key => $value) : ?>
                 <tr>
                   <td><?php echo $key + 1 ?></td>
-                  <td><?php echo $value['BrandName'] ?></td>
-                  <td>
-                    <img src="..//uploads//<?php echo $value['Image'] ?>" alt="" width="100">
-                  </td>
+                  <td><?php echo $value['CategoryName'] ?></td>
                   <td>
                     <button type="button" class="btn btn-primary">
-                      <a style="color: white" ; href="brand_update.php?id=<?php echo $value['BrandId'] ?>">Sửa</a>
+                      <a style="color: white" ; href="category_update.php?id=<?php echo $value['CategoryId'] ?>">Sửa</a>
                     </button>
                     <button type="button" class="btn btn-danger">
-                      <a style="color: white" ; href="brand_delete.php?id=<?php echo $value['BrandId'] ?>" onclick="return confirm('Bạn có chắc chắn xóa ?')">Xóa</a>
+                      <a style="color: white" ; href="category_delete.php?id=<?php echo $value['CategoryId'] ?>" onclick="return confirm('Bạn có chắc chắn xóa ?')">Xóa</a>
                     </button>
                   </td>
                 </tr>
@@ -153,7 +150,7 @@ $Brands = mysqli_query($conn, $query2);
       </div>
       <div class="mt-4">
         <button type="button" class="btn btn-success">
-          <a style="color: white" ; href="brand_add.php">Thêm Mới</a>
+          <a style="color: white" ; href="category_add.php">Thêm Mới</a>
         </button>
       </div>
       <?php if($page > 1) {?>
@@ -164,17 +161,17 @@ $Brands = mysqli_query($conn, $query2);
             if($cr_page - 1 > 0) {
           ?> 
           <li class="page-item first">
-            <a class="page-link" href="brand_list.php?page=1"><i class="tf-icon bx bx-chevrons-left"></i></a>
+            <a class="page-link" href="category_list.php?page=1"><i class="tf-icon bx bx-chevrons-left"></i></a>
           </li>
           <li class="page-item prev">
-            <a class="page-link" href="brand_list.php?page=<?php echo $cr_page - 1 ?>"><i class="tf-icon bx bx-chevron-left"></i></a>
+            <a class="page-link" href="category_list.php?page=<?php echo $cr_page - 1 ?>"><i class="tf-icon bx bx-chevron-left"></i></a>
           </li>
           <?php 
             } 
           ?>
           <?php for($i=1; $i <= $page ; $i++) {?> 
           <li class="page-item  <?php echo (($cr_page == $i)? 'active' : '') ?>">
-            <a class="page-link" href="brand_list.php?page=<?php echo $i ?>"><?php echo $i ?></a>
+            <a class="page-link" href="category_list.php?page=<?php echo $i ?>"><?php echo $i ?></a>
           </li>
           <?php 
             } 
@@ -184,10 +181,10 @@ $Brands = mysqli_query($conn, $query2);
             if($cr_page + 1 <= $page) {
           ?> 
           <li class="page-item next">
-            <a class="page-link" href="brand_list.php?page=<?php echo $cr_page + 1 ?>"><i class="tf-icon bx bx-chevron-right"></i></a>
+            <a class="page-link" href="category_list.php?page=<?php echo $cr_page + 1 ?>"><i class="tf-icon bx bx-chevron-right"></i></a>
           </li>
           <li class="page-item last">
-            <a class="page-link" href="brand_list.php?page=<?php echo $page ?>"><i class="tf-icon bx bx-chevrons-right"></i></a>
+            <a class="page-link" href="category_list.php?page=<?php echo $page ?>"><i class="tf-icon bx bx-chevrons-right"></i></a>
           </li>
           <?php
             }
