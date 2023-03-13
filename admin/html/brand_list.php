@@ -3,7 +3,7 @@ include($_SERVER["DOCUMENT_ROOT"] . '/admin/inc/header.php');
 include($_SERVER['DOCUMENT_ROOT'] . "/admin/inc/navbar.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
-$query = "SELECT * FROM Brands";
+$query = "SELECT * FROM Brands where Status = 1";
 
 $Brands = mysqli_query($conn, $query);
 
