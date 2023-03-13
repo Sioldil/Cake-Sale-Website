@@ -5,7 +5,7 @@
       $id = $_GET['id'];
     }
 
-    $query = "DELETE FROM  Brands WHERE BrandId = $id";
+    $query = "UPDATE  Brands set Status = 0  WHERE BrandId = $id";
     $delete = mysqli_query($conn, $query);
     
     if($delete){

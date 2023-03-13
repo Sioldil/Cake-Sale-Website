@@ -5,9 +5,9 @@ include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
 $query = "SELECT * FROM Brands where Status = 1";
 
-$Brands = mysqli_query($conn, $query);
+$Brands1 = mysqli_query($conn, $query);
 
-$total = mysqli_num_rows($Brands);
+$total = mysqli_num_rows($Brands1);
 
 $limit = 5;
 
@@ -130,7 +130,7 @@ $Brands = mysqli_query($conn, $query2);
             </thead>
             <tbody class="table-border-bottom-0">
               <?php
-              foreach ($Brands as $key => $value) : ?>
+              foreach ($Brands1 as $key => $value) : ?>
                 <tr>
                   <td><?php echo $key + 1 ?></td>
                   <td><?php echo $value['BrandName'] ?></td>
