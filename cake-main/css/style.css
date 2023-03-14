@@ -199,6 +199,11 @@ ol {
   -webkit-animation: loader 0.8s linear infinite;
 }
 
+@font-face {
+  font-family: 'Callephane';
+  src: url(../fonts/Callephane\ Regular.otf);
+}
+
 @keyframes loader {
   0% {
     -webkit-transform: rotate(0deg);
