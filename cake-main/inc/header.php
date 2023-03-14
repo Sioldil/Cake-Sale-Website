@@ -143,7 +143,7 @@
                     <nav class="header__menu mobile-menu">
                         <ul>
                             <li class="active"><a href="./index.php">Home</a></li>
-                            <li><a href="./shop.html">Shop</a></li>
+                            <li><a href="./list_product.php">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>

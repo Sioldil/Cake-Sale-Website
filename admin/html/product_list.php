@@ -16,9 +16,9 @@ $limit = 5;
 
 $page = ceil($total / $limit);
 
-$cr_page = (isset($_GET['page']) ? $_GET['page'] : 1)   ;
+$cr_page = (isset($_GET['page']) ? $_GET['page'] : 1);
 
-$start = ($cr_page - 1)*$limit;
+$start = ($cr_page - 1) * $limit;
 
 $query2 = "SELECT a.ProductId, a.Name, a.Image, c.CategoryName, b.BrandName, a.BuyPrice,a.SellPrice, a.CountView, a.Status 
               FROM `products` a, category c, brands b 
@@ -27,6 +27,10 @@ $query2 = "SELECT a.ProductId, a.Name, a.Image, c.CategoryName, b.BrandName, a.B
               LIMIT $start,$limit";
 
 $Products = mysqli_query($conn, $query2);
+
+$query3 = "SELECT *FROM Category where status = 1";
+$Category = mysqli_query($conn, $query3);
+
 ?>
 
 <div class="layout-page">
@@ -122,7 +126,16 @@ $Products = mysqli_query($conn, $query2);
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
       <h4 class="fw-bold py-3 mb-4">Danh sách sản phẩm</h4>
-
+      <form action="" method="GET" class="form-control">
+        <select name="id_category" id="id_category" onchange="location = this.value;">
+          <option value="">Loại bánh</option>
+          <?php foreach ($Category as $key => $value) { ?>
+            <option value='view_product_by_id_category.php?id=<?php echo $value["CategoryId"] ?>'>
+              <?php echo $value["CategoryName"] ?>
+            </option>
+          <?php } ?>
+        </select>
+      </form>
       <!-- Basic Bootstrap Table -->
       <div class="card">
         <div class="table-responsive text-nowrap">
@@ -179,46 +192,46 @@ $Products = mysqli_query($conn, $query2);
           <a style="color: white" ; href="product_add.php">Thêm Mới</a>
         </button>
       </div>
-      <?php if($page > 1) {?>
-      <hr>
-      <nav aria-label="Page navigation">       
-        <ul class="pagination">
-          <?php 
-            if($cr_page - 1 > 0) {
-          ?> 
-          <li class="page-item first">
-            <a class="page-link" href="product_list.php?page=1"><i class="tf-icon bx bx-chevrons-left"></i></a>
-          </li>
-          <li class="page-item prev">
-            <a class="page-link" href="product_list.php?page=<?php echo $cr_page - 1 ?>"><i class="tf-icon bx bx-chevron-left"></i></a>
-          </li>
-          <?php 
-            } 
-          ?>
-          <?php for($i=1; $i <= $page ; $i++) {?> 
-          <li class="page-item  <?php echo (($cr_page == $i)? 'active' : '') ?>">
-            <a class="page-link" href="product_list.php?page=<?php echo $i ?>"><?php echo $i ?></a>
-          </li>
-          <?php 
-            } 
-          ?>
-          </li>
-          <?php 
-            if($cr_page + 1 <= $page) {
-          ?> 
-          <li class="page-item next">
-            <a class="page-link" href="product_list.php?page=<?php echo $cr_page + 1 ?>"><i class="tf-icon bx bx-chevron-right"></i></a>
-          </li>
-          <li class="page-item last">
-            <a class="page-link" href="product_list.php?page=<?php echo $page ?>"><i class="tf-icon bx bx-chevrons-right"></i></a>
-          </li>
-          <?php
+      <?php if ($page > 1) { ?>
+        <hr>
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            <?php
+            if ($cr_page - 1 > 0) {
+            ?>
+              <li class="page-item first">
+                <a class="page-link" href="product_list.php?page=1"><i class="tf-icon bx bx-chevrons-left"></i></a>
+              </li>
+              <li class="page-item prev">
+                <a class="page-link" href="product_list.php?page=<?php echo $cr_page - 1 ?>"><i class="tf-icon bx bx-chevron-left"></i></a>
+              </li>
+            <?php
             }
-          ?>
-        </ul>
-      </nav>
+            ?>
+            <?php for ($i = 1; $i <= $page; $i++) { ?>
+              <li class="page-item  <?php echo (($cr_page == $i) ? 'active' : '') ?>">
+                <a class="page-link" href="product_list.php?page=<?php echo $i ?>"><?php echo $i ?></a>
+              </li>
+            <?php
+            }
+            ?>
+            </li>
+            <?php
+            if ($cr_page + 1 <= $page) {
+            ?>
+              <li class="page-item next">
+                <a class="page-link" href="product_list.php?page=<?php echo $cr_page + 1 ?>"><i class="tf-icon bx bx-chevron-right"></i></a>
+              </li>
+              <li class="page-item last">
+                <a class="page-link" href="product_list.php?page=<?php echo $page ?>"><i class="tf-icon bx bx-chevrons-right"></i></a>
+              </li>
+            <?php
+            }
+            ?>
+          </ul>
+        </nav>
       <?php
-      } 
+      }
       ?>
     </div>
   </div>
