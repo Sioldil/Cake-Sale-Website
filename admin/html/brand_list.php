@@ -3,11 +3,11 @@ include($_SERVER["DOCUMENT_ROOT"] . '/admin/inc/header.php');
 include($_SERVER['DOCUMENT_ROOT'] . "/admin/inc/navbar.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
-$query = "SELECT * FROM Brands where Status = 1";
+$query = "SELECT * FROM Brands";
 
-$Brands1 = mysqli_query($conn, $query);
+$Brands = mysqli_query($conn, $query);
 
-$total = mysqli_num_rows($Brands1);
+$total = mysqli_num_rows($Brands);
 
 $limit = 5;
 
@@ -17,7 +17,7 @@ $cr_page = (isset($_GET['page']) ? $_GET['page'] : 1);
 
 $start = ($cr_page - 1) * $limit;
 
-$query2 = "SELECT * FROM Brands LIMIT $start,$limit";
+$query2 = "SELECT * FROM Brands where Status = 1 LIMIT $start,$limit";
 
 $Brands = mysqli_query($conn, $query2);
 
@@ -130,7 +130,7 @@ $Brands = mysqli_query($conn, $query2);
             </thead>
             <tbody class="table-border-bottom-0">
               <?php
-              foreach ($Brands1 as $key => $value) : ?>
+              foreach ($Brands as $key => $value) : ?>
                 <tr>
                   <td><?php echo $key + 1 ?></td>
                   <td><?php echo $value['BrandName'] ?></td>

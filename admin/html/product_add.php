@@ -2,10 +2,10 @@
 include($_SERVER['DOCUMENT_ROOT'] . "/admin/inc/header.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
-$sql = "SELECT * FROM category";
+$sql = "SELECT * FROM category where status = 1 ";
 $categorys = mysqli_query($conn, $sql);
 
-$sql = "SELECT * FROM brands";
+$sql = "SELECT * FROM brands where status = 1";
 $brands = mysqli_query($conn, $sql);
 
 

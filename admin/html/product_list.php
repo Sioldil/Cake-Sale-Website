@@ -22,7 +22,7 @@ $start = ($cr_page - 1)*$limit;
 
 $query2 = "SELECT a.ProductId, a.Name, a.Image, c.CategoryName, b.BrandName, a.BuyPrice,a.SellPrice, a.CountView, a.Status 
               FROM `products` a, category c, brands b 
-              WHERE a.CategoriId = c.CategoryId and a.BrandId = b.BrandId 
+              WHERE a.CategoriId = c.CategoryId and a.BrandId = b.BrandId
               ORDER BY a.ProductId DESC
               LIMIT $start,$limit";
 
