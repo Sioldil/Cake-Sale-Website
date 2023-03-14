@@ -3,7 +3,7 @@ include($_SERVER["DOCUMENT_ROOT"] . '/admin/inc/header.php');
 include($_SERVER['DOCUMENT_ROOT'] . "/admin/inc/navbar.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
-$query = "SELECT * FROM Brands where Status = 1";
+$query = "SELECT * FROM Brands";
 
 $Brands = mysqli_query($conn, $query);
 
@@ -17,7 +17,7 @@ $cr_page = (isset($_GET['page']) ? $_GET['page'] : 1);
 
 $start = ($cr_page - 1) * $limit;
 
-$query2 = "SELECT * FROM Brands LIMIT $start,$limit";
+$query2 = "SELECT * FROM Brands where Status = 1 LIMIT $start,$limit";
 
 $Brands = mysqli_query($conn, $query2);
 

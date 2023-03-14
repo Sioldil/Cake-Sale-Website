@@ -5,9 +5,9 @@ include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
 $query = "SELECT * FROM Category where status = 1";
 
-$Category1 = mysqli_query($conn, $query);
+$Category = mysqli_query($conn, $query);
 
-$total = mysqli_num_rows($Category1);
+$total = mysqli_num_rows($Category);
 
 $limit = 5;
 
@@ -17,7 +17,7 @@ $cr_page = (isset($_GET['page']) ? $_GET['page'] : 1);
 
 $start = ($cr_page - 1) * $limit;
 
-$query2 = "SELECT * FROM Category LIMIT $start,$limit";
+$query2 = "SELECT * FROM Category where Status = 1 LIMIT $start,$limit";
 
 $Category = mysqli_query($conn, $query2);
 
@@ -130,7 +130,7 @@ $Category = mysqli_query($conn, $query2);
             </thead>
             <tbody class="table-border-bottom-0">
               <?php
-              foreach ($Category1 as $key => $value) : ?>
+              foreach ($Category as $key => $value) : ?>
                 <tr>
                   <td><?php echo $key + 1 ?></td>
                   <td><?php echo $value['CategoryName'] ?></td>
