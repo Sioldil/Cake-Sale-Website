@@ -5,11 +5,11 @@
       $id = $_GET['id'];
     }
 
-    $query = "UPDATE Brands SET status = 0 WHERE BrandId = $id";
+    $query = " UPDATE Category SET status = 0 WHERE CategoryId = '$id'";
     $delete = mysqli_query($conn, $query);
     
     if($delete){
-        header('location: brand_list.php');
+        header('location: category_list.php');
     }else{
         echo "xảy ra lỗi khi xóa";
     }

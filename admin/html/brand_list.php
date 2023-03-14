@@ -17,7 +17,7 @@ $cr_page = (isset($_GET['page']) ? $_GET['page'] : 1);
 
 $start = ($cr_page - 1) * $limit;
 
-$query2 = "SELECT * FROM Brands LIMIT $start,$limit";
+$query2 = "SELECT * FROM Brands where Status = 1 LIMIT $start,$limit";
 
 $Brands = mysqli_query($conn, $query2);
 

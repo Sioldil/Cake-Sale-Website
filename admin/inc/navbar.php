@@ -62,7 +62,7 @@
           </li>
           <!-- Category -->
           <li class="menu-item">
-            <a href="category.php?page=1" class="menu-link">
+            <a href="category_list.php?page=1" class="menu-link">
               <i class="menu-icon tf-icons bx bx-collection"></i>
               <div data-i18n="Basic">Categories</div>
             </a>  
