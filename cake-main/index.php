@@ -1,11 +1,9 @@
 <?php
 include($_SERVER['DOCUMENT_ROOT'] . "/cake-main/inc/header.php");
-
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
     $query = "SELECT *FROM Products where status = 1";
     $Products = mysqli_query($conn, $query);
-
 
 ?>
 <!-- Hero Section Begin -->
