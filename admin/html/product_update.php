@@ -139,8 +139,8 @@ if (isset($_POST['submit'])) {
                             <div class="mp-3">
                                 <label class="form-label">Trạng thái</label>
                                 </br>
-                                <label>
-                                    <input type="radio" name="status" value="1" id="status" checked>
+                            <label>
+                            <input type="radio" name="status" value="1" id="status" checked>
                                     Hiện
                                 </label>
                                 </br>
