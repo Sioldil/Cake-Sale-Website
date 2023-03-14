@@ -1,11 +1,10 @@
 <?php
     include($_SERVER['DOCUMENT_ROOT'] . "/cake-main/inc/auth_header.php");
-    include($_SERVER['DOCUMENT_ROOT'] . "/classes/admin_login.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/classes/user_register.php");
 ?>
 <?php
 $ad = new user_register();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
   $insertUser = $ad->insert_user($_POST);
 }
 ?>
@@ -19,8 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <form action="register.php" method="post">
                             <input type="text" placeholder="Enter your name" name="Fullname">
                             <input type="text" placeholder="Enter your email" name="Email">
-                            <input type="password" placeholder="*******" name="Password">
-                            <button type="submit" class="site-btn">login</button>
+                            <input type="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" name="Password">
+                            <button type="submit" class="site-btn">register</button>
                         </form>
                     </div>
                     </div>
@@ -31,5 +30,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!-- Hero Section End -->
 
 <?php
-include($_SERVER["DOCUMENT_ROOT"] . '/cake-main/inc/footer.php');
+    include($_SERVER["DOCUMENT_ROOT"] . '/cake-main/inc/footer.php');
 ?>
