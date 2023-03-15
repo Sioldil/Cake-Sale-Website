@@ -26,12 +26,12 @@ class user_register
             $alert = "<span class = 'error'>Fields must not be empty</span>";
             return $alert;
         }else{
-            $check_Email = "SELECT * FROM customer WHERE Email='$Email' LIMIT 1";
+            $check_Email = "SELECT * FROM customers WHERE Email='$Email' LIMIT 1";
             $result_check = $this->db->select($check_Email);
             if($result_check){
                 $alert = "<span class = 'error'>Email already existed</span>";
             }else{
-                $query = "INSERT INTO customer(Fullname,Email,Password) VALUES('$Fullname','$Email','$Hash_Pass')";
+                $query = "INSERT INTO customers(Fullname,Email,Password) VALUES('$Fullname','$Email','$Hash_Pass')";
                 $result = $this->db->insert($query);
                 if($result){
                     $alert = "<span class = 'success'>Register succesfully</span>";
