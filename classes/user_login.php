@@ -1,6 +1,6 @@
 <?php
-include($_SERVER['DOCUMENT_ROOT'] . "/lib/session.php");
-Session::checkLogin();
+include($_SERVER['DOCUMENT_ROOT'] . "/lib/user_session.php");
+User_Session::checkLogin();
 include($_SERVER['DOCUMENT_ROOT'] . "/lib/database.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/helpers/format.php");
 ?>

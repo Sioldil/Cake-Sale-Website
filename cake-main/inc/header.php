@@ -1,6 +1,6 @@
 <?php
-    include ($_SERVER['DOCUMENT_ROOT'] . "/lib/session.php");
-    Session::init();
+    include ($_SERVER['DOCUMENT_ROOT'] . "/lib/user_session.php");
+    User_Session::init();
 ?>
 <?php
     include_once ($_SERVER['DOCUMENT_ROOT'] . "/lib/database.php");
