@@ -39,7 +39,7 @@ class user_login
                 Session::set('login', true);
                 Session::set('CustomerId', $value['CustomerId']);
                 Session::set('Email', $value['Email']);
-                Session::set('Name',$value['Name']);
+                Session::set('Fullname',$value['Fullname']);
                 header('Location:index.php');
             } else {
                 $alert = "Email or Password not match";

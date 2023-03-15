@@ -3,7 +3,7 @@ include($_SERVER['DOCUMENT_ROOT'] . "/cake-main/inc/header.php");
 
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
-$query = "SELECT *FROM Products where status = 1";
+$query = "SELECT *FROM Products where status = 1 order by CountView desc";
 $Products = mysqli_query($conn, $query);
 
 

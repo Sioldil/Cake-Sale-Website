@@ -3,18 +3,22 @@ include($_SERVER['DOCUMENT_ROOT'] . "/cake-main/inc/header.php");
 
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
-if(isset($_GET['id'])){
+if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
     $query = "SELECT *FROM Products p, Category c where p.status = 1 and c.status = 1
      and c.CategoryId = p.CategoriId and CategoryId = '$id'";
     $Products = mysqli_query($conn, $query);
 
+ 
+    $query2 = "SELECT *FROM  Category where status = 1";
+    $Category = mysqli_query($conn, $query2);
 
-    $query1 = "SELECT *FROM  Category c where c.status = 1 and CategoryId = '$id'";
-    $Category = mysqli_query($conn, $query1);
+    $query3 = "SELECT *FROM  Category where status = 1 and CategoryId = '$id'  ";
+    $test = mysqli_query($conn, $query3);
 
-    $data = mysqli_fetch_assoc($Category);
+    $data = mysqli_fetch_assoc($test);
+
 }
 
 ?>
@@ -46,10 +50,13 @@ if(isset($_GET['id'])){
                 <div class="col-lg-7 col-md-7">
                     <div class="shop__option__search">
                         <form action="" method="GET">
-                            <select name="id_category" id="id_category">
-                                <option value="<?php echo $data["CategoryId"] ?>">
-                                <?php echo $data["CategoryName"] ?>
-                                </option>
+                            <select name="id_category" id="id_category" onchange="location = this.value;">
+                                <option value=""><?php echo $data['CategoryName'] ?></option>
+                                <?php foreach ($Category as $key => $value) { ?>
+                                    <option value='list_product_by_category.php?id=<?php echo $value["CategoryId"] ?>'>
+                                        <?php echo $value["CategoryName"] ?>
+                                    </option>
+                                <?php } ?>
                             </select>
                             <input type="text" placeholder="Search">
                             <button type="submit"><i class="fa fa-search"></i></button>
