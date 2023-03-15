@@ -7,7 +7,7 @@ if(isset($_GET['id'])){
     $id = $_GET['id'];
 
     $query = "SELECT *FROM Products p, Category c,Brands b where p.status = 1 and c.status = 1 and p.BrandId = b.BrandId
-                and c.CategoryId = p.CategoriId and CategoryId = '$id' ORDER BY p.ProductId DESC";
+                and c.CategoryId = p.CategoriId and CategoryId = '$id' ORDER BY CountView DESC";
     $Products = mysqli_query($conn, $query);
 
 $total = mysqli_num_rows($Products);
@@ -23,16 +23,23 @@ $start = ($cr_page - 1) * $limit;
 $query2 = "SELECT a.ProductId, a.Name, a.Image, c.CategoryName, b.BrandName, a.BuyPrice,a.SellPrice, a.CountView, a.Status 
               FROM `products` a, category c, brands b 
               WHERE a.CategoriId = c.CategoryId and a.BrandId = b.BrandId and c.CategoryId = '$id'
-              ORDER BY a.ProductId DESC
+              ORDER BY a.CountView DESC
               LIMIT $start,$limit";
 
 $Products = mysqli_query($conn, $query2);
 
 
-$query3 = "SELECT *FROM Category where status = 1";
+$query3 = "SELECT *FROM  Category where status = 1";
 $Category = mysqli_query($conn, $query3);
 
-$data = mysqli_fetch_assoc($Category);
+$query4 = "SELECT *FROM  Category where status = 1 and CategoryId = '$id'  ";
+$test = mysqli_query($conn, $query4);
+
+$data = mysqli_fetch_assoc($test);
+
+
+
+
 }
 ?>
 
@@ -130,10 +137,13 @@ $data = mysqli_fetch_assoc($Category);
         <div class="container-xxl flex-grow-1 container-p-y">
             <h4 class="fw-bold py-3 mb-4">Danh sách sản phẩm</h4>
             <form action="" method="GET">
-                <select name="id_category" id="id_category">
-                    <option value="<?php echo $data["CategoryId"] ?>">
-                        <?php echo $data["CategoryName"] ?>
+                <select name="id_category" id="id_category" onchange="location = this.value;">
+                    <option value=""><?php echo $data['CategoryName'] ?></option>
+                                    <?php foreach ($Category as $key => $value) { ?>
+                                        <option value='view_product_by_id_category.php?id=<?php echo $value["CategoryId"] ?>'>
+                            <?php echo $value["CategoryName"] ?>
                     </option>
+                        <?php } ?>
                 </select>
             </form>
             <!-- Basic Bootstrap Table -->
