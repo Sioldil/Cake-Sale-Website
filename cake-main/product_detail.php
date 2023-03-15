@@ -19,6 +19,13 @@ if (isset($_GET['id'])) {
     $data1 = mysqli_query($conn, $query1);
 
 
+    if(isset($_GET['id'])){
+
+        $id = $_GET['id'];
+        $query2 = "UPDATE products set CountView = CountView+1 where ProductId = '$id'";
+        $data2 = mysqli_query($conn, $query2);
+    }
+
 }
 ?>
 

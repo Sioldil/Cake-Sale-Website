@@ -3,14 +3,11 @@ include($_SERVER["DOCUMENT_ROOT"] . '/admin/inc/header.php');
 include($_SERVER['DOCUMENT_ROOT'] . "/admin/inc/navbar.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
-$query = "SELECT a.ProductId, a.Name, a.Image, c.CategoryName, b.BrandName, a.BuyPrice,a.SellPrice, a.CountView, a.Status 
-              FROM `products` a, category c, brands b 
-              WHERE a.CategoriId = c.CategoryId and a.BrandId = b.BrandId 
-              ORDER BY a.ProductId DESC";
+$query = "SELECT * FROM Customers";
 
-$Products = mysqli_query($conn, $query);
+$Customers = mysqli_query($conn, $query);
 
-$total = mysqli_num_rows($Products);
+$total = mysqli_num_rows($Customers);
 
 $limit = 5;
 
@@ -20,21 +17,11 @@ $cr_page = (isset($_GET['page']) ? $_GET['page'] : 1);
 
 $start = ($cr_page - 1) * $limit;
 
-$query2 = "SELECT a.ProductId, a.Name, a.Image, c.CategoryName, b.BrandName, a.BuyPrice,a.SellPrice, a.CountView, a.Status 
-              FROM `products` a, category c, brands b 
-              WHERE a.CategoriId = c.CategoryId and a.BrandId = b.BrandId
-              ORDER BY CountView DESC
-              LIMIT $start,$limit";
+$query2 = "SELECT * FROM Customers where Status = 1 LIMIT $start,$limit";
 
-$Products = mysqli_query($conn, $query2);
-
-$query3 = "SELECT *FROM Category where status = 1";
-$Category = mysqli_query($conn, $query3);
-
-
+$Customers = mysqli_query($conn, $query2);
 
 ?>
-
 <div class="layout-page">
   <!-- Navbar -->
 
@@ -127,17 +114,8 @@ $Category = mysqli_query($conn, $query3);
   <div class="content-wrapper">
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
-      <h4 class="fw-bold py-3 mb-4">Danh sách sản phẩm</h4>
-      <form action="" method="GET" class="form-control">
-        <select name="id_category" id="id_category" onchange="location = this.value;">
-          <option value="">Loại bánh</option>
-          <?php foreach ($Category as $key => $value) { ?>
-            <option value='view_product_by_id_category.php?id=<?php echo $value["CategoryId"] ?>'>
-              <?php echo $value["CategoryName"] ?>
-            </option>
-          <?php } ?>
-        </select>
-      </form>
+      <h4 class="fw-bold py-3 mb-4">Danh sách người dùng</h4>
+
       <!-- Basic Bootstrap Table -->
       <div class="card">
         <div class="table-responsive text-nowrap">
@@ -145,42 +123,29 @@ $Category = mysqli_query($conn, $query3);
             <thead>
               <tr>
                 <th>STT</th>
-                <th>Tên sản phẩm</th>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+                <th>Địa chỉ</th>
                 <th>Hình ảnh</th>
-                <th>Loại bánh</th>
-                <th>Thương hiệu</th>
-                <th>Giá nhập</th>
-                <th>Giá bán</th>
-                <th>Số lượt xem</th>
-                <th>Trạng thái</th>
                 <th>Chức năng</th>
               </tr>
             </thead>
             <tbody class="table-border-bottom-0">
               <?php
-              foreach ($Products as $key => $value) : ?>
+              foreach ($Customers as $key => $value) : ?>
                 <tr>
                   <td><?php echo $key + 1 ?></td>
-                  <td><?php echo $value['Name'] ?></td>
+                  <td><?php echo $value['Fullname'] ?></td>
+                  <td><?php echo $value['Email'] ?></td>
+                  <td><?php echo $value['PhoneNumber'] ?></td>
+                  <td><?php echo $value['Address'] ?></td>
                   <td>
                     <img src="..//uploads//<?php echo $value['Image'] ?>" alt="" width="100">
                   </td>
-                  <td><?php echo $value['CategoryName'] ?></td>
-                  <td><?php echo $value['BrandName'] ?></td>
-                  <td><?php echo $value['BuyPrice'] ?></td>
-                  <td><?php echo $value['SellPrice'] ?></td>
-                  <td><?php echo $value['CountView'] ?></td>
-                  <?php if ($value['Status'] == 1) { ?>
-                    <td>Hiện</td>
-                  <?php } else { ?>
-                    <td>Ẩn</td>
-                  <?php } ?>
                   <td>
-                    <button type="button" class="btn btn-primary">
-                      <a style="color: white" ; href="product_update.php?id=<?php echo $value['ProductId'] ?>">Sửa</a>
-                    </button>
                     <button type="button" class="btn btn-danger">
-                      <a style="color: white" ; href="product_delete.php?id=<?php echo $value['ProductId'] ?>" onclick="return confirm('Bạn có chắc chắn xóa ?')">Xóa</a>
+                      <a style="color: white" ; href="user_delete.php?id=<?php echo $value['CustomerId'] ?>" onclick="return confirm('Bạn có chắc chắn xóa ?')">Xóa</a>
                     </button>
                   </td>
                 </tr>
@@ -189,51 +154,46 @@ $Category = mysqli_query($conn, $query3);
           </table>
         </div>
       </div>
-      <div class="mt-4">
-        <button type="button" class="btn btn-success">
-          <a style="color: white" ; href="product_add.php">Thêm Mới</a>
-        </button>
-      </div>
-      <?php if ($page > 1) { ?>
-        <hr>
-        <nav aria-label="Page navigation">
-          <ul class="pagination">
-            <?php
-            if ($cr_page - 1 > 0) {
-            ?>
-              <li class="page-item first">
-                <a class="page-link" href="product_list.php?page=1"><i class="tf-icon bx bx-chevrons-left"></i></a>
-              </li>
-              <li class="page-item prev">
-                <a class="page-link" href="product_list.php?page=<?php echo $cr_page - 1 ?>"><i class="tf-icon bx bx-chevron-left"></i></a>
-              </li>
-            <?php
+      <?php if($page > 1) {?>
+      <hr>
+      <nav aria-label="Page navigation">       
+        <ul class="pagination">
+          <?php 
+            if($cr_page - 1 > 0) {
+          ?> 
+          <li class="page-item first">
+            <a class="page-link" href="user_list.php?page=1"><i class="tf-icon bx bx-chevrons-left"></i></a>
+          </li>
+          <li class="page-item prev">
+            <a class="page-link" href="user_list.php?page=<?php echo $cr_page - 1 ?>"><i class="tf-icon bx bx-chevron-left"></i></a>
+          </li>
+          <?php 
+            } 
+          ?>
+          <?php for($i=1; $i <= $page ; $i++) {?> 
+          <li class="page-item  <?php echo (($cr_page == $i)? 'active' : '') ?>">
+            <a class="page-link" href="user_list.php?page=<?php echo $i ?>"><?php echo $i ?></a>
+          </li>
+          <?php 
+            } 
+          ?>
+          </li>
+          <?php 
+            if($cr_page + 1 <= $page) {
+          ?> 
+          <li class="page-item next">
+            <a class="page-link" href="user_list.php?page=<?php echo $cr_page + 1 ?>"><i class="tf-icon bx bx-chevron-right"></i></a>
+          </li>
+          <li class="page-item last">
+            <a class="page-link" href="user_list.php?page=<?php echo $page ?>"><i class="tf-icon bx bx-chevrons-right"></i></a>
+          </li>
+          <?php
             }
-            ?>
-            <?php for ($i = 1; $i <= $page; $i++) { ?>
-              <li class="page-item  <?php echo (($cr_page == $i) ? 'active' : '') ?>">
-                <a class="page-link" href="product_list.php?page=<?php echo $i ?>"><?php echo $i ?></a>
-              </li>
-            <?php
-            }
-            ?>
-            </li>
-            <?php
-            if ($cr_page + 1 <= $page) {
-            ?>
-              <li class="page-item next">
-                <a class="page-link" href="product_list.php?page=<?php echo $cr_page + 1 ?>"><i class="tf-icon bx bx-chevron-right"></i></a>
-              </li>
-              <li class="page-item last">
-                <a class="page-link" href="product_list.php?page=<?php echo $page ?>"><i class="tf-icon bx bx-chevrons-right"></i></a>
-              </li>
-            <?php
-            }
-            ?>
-          </ul>
-        </nav>
+          ?>
+        </ul>
+      </nav>
       <?php
-      }
+      } 
       ?>
     </div>
   </div>
