@@ -36,10 +36,10 @@ class user_login
 
             if ($result != false) {
                 $value = $result->fetch_assoc();
-                Session::set('login', true);
-                Session::set('CustomerId', $value['CustomerId']);
-                Session::set('Email', $value['Email']);
-                Session::set('Fullname',$value['Fullname']);
+                User_Session::set('user_login', true);
+                User_Session::set('CustomerId', $value['CustomerId']);
+                User_Session::set('Email', $value['Email']);
+                User_Session::set('Fullname',$value['Fullname']);
                 header('Location:index.php');
             } else {
                 $alert = "Email or Password not match";
