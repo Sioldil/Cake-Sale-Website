@@ -34,7 +34,7 @@ $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
     <div class="container">
         <div class="row">
         <div class="table-responsive text-nowrap">
-          <table class="table">
+          <table class="table" style="text-align: center">
             <thead>
               <tr>
                 <th>STT</th>
@@ -63,7 +63,7 @@ $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
                     <form action="cart.php">
                         <input type="hidden" name="action" value="update">
                         <input type="hidden" name="id" value="<?php echo $value['id'] ?>">
-                        <input  type="text" name="quantity" value="<?php echo $value['quantity']?>">
+                        <input  type="text" style="width: 10" name="quantity" value="<?php echo $value['quantity']?>">
                         <button class="btn btn-primary" type="submit">Cập nhật</button>
                     </form>
                     </td>
@@ -80,11 +80,12 @@ $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
                 <td>Tổng tiền</td>
                 <td colspan="6" class="text-center bg-infor"><?php echo $total_price ?> usd</td>
               </tr>
-            </tbody>
+            </tbody> 
           </table>
           <button class="btn btn-success">
-            <a style="color: white" ; href="checkout.php">Thanh toán</a>
+            <a style="color: white;" href="checkout.php">Thanh toán</a>
           </button>
+         
         </div>
         </div>
     </div>

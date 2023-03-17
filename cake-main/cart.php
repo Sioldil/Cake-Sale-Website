@@ -14,12 +14,6 @@ if($quantity <= 0){
     $quantity = 1;
 }
 
-// session_destroy();
-// die();
-
-// var_dump($action);
-// die();
-
 $query = "SELECT *from Products where ProductId = '$id'";
 
 $data = mysqli_query($conn,$query);
