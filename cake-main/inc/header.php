@@ -18,7 +18,6 @@
     $ur = new Users();
 
 
-
 ?>
 <?php
   header("Cache-Control: no-cache, must-revalidate");
@@ -27,7 +26,6 @@
   header("Cache-Control: max-age=2592000");
 
 ?>
-
 
 <?php
 if (isset($_GET['action']) && $_GET['action'] == 'logout') {

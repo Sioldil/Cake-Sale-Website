@@ -5,6 +5,8 @@ include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
 $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
 
+$check_login = User_Session::checkLogin();
+
 ?>
 
 <div class="breadcrumb-option">
@@ -28,7 +30,7 @@ $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
 
 <!-- Shop Section Begin -->
 <section class="shop spad">
-    <?php if(){  ?>
+    <?php if(!$check_login){  ?>
     <div class="container">
         <div class="shop__option">
             <div class="row">

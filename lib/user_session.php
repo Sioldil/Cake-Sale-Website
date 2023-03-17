@@ -27,7 +27,7 @@
           public static function checkSession(){
              self::init();
              if (self::get("user_login") == false) {
-               Session::Set == 
+              return false;
              }
           }
 
