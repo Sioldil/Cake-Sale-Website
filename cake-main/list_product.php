@@ -24,7 +24,7 @@ $Category = mysqli_query($conn, $query1);
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="breadcrumb__links">
-                    <a href="./index.html">Home</a>
+                    <a href="./index.php">Home</a>
                     <span>Shop</span>
                 </div>
             </div>
@@ -49,8 +49,10 @@ $Category = mysqli_query($conn, $query1);
                                     </option>
                                 <?php } ?>
                             </select>
-                            <input type="text" placeholder="Search">
-                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+
+                        <form action="search_product.php?key=" method="GET">
+                            <input type="text" placeholder="Search" name="key" class="fa fa-search">
                         </form>
                     </div>
                 </div>
@@ -93,7 +95,7 @@ $Category = mysqli_query($conn, $query1);
                             <h5>Giá <?php echo $value['SellPrice'] . ' $USD' ?></h5>
                             <div>
                                 <button class="btn primary-btn mt-4">
-                                    <a style="color: white" href="cart_add.php">Thêm giỏ hàng</a>
+                                    <a style="color: white" href="cart.php?id=<?php echo $value['ProductId'] ?>">Thêm giỏ hàng</a>
                                 </button>
                             </div>
                         </div>
