@@ -14,7 +14,7 @@ if (isset($_GET['id'])) {
     $data = mysqli_query($conn, $query);
     $product = mysqli_fetch_assoc($data);
 
-
+    //Hiển thị sản phẩm tương tự
     $query1 = "SELECT *from products where status = 1";
     $data1 = mysqli_query($conn, $query1);
 
@@ -61,25 +61,29 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="product__details__text">
-                    <h4><?php echo $product['Name'] ?></h4>
-                    <h5>Giá: <?php echo $product['SellPrice'] ?></h5>
-                    <p><?php echo $product['Description'] ?></p>
-                    <ul>
-                        <li>Số lượng: <span><?php echo $product['Quantity'] ?></span></li>
-                        <li>Loại bánh: <span><?php echo $product['CategoryName'] ?></span></li>
-                        <li>Thương hiệu: <span><?php echo $product['BrandName'] ?></span></li>
-                    </ul>
-                    <div class="product__details__option">
-                        <div class="quantity">
-                            <div class="pro-qty">
-                                <input type="text" value="1">
+                <form action="cart.php" method="GET">
+                    <div class="product__details__text">
+                        <h4><?php echo $product['Name'] ?></h4>
+                        <h5>Giá: <?php echo $product['SellPrice'] ?></h5>
+                        <p><?php echo $product['Description'] ?></p>
+                        <ul>
+                            <li>Số lượng: <span><?php echo $product['Quantity'] ?></span></li>
+                            <li>Loại bánh: <span><?php echo $product['CategoryName'] ?></span></li>
+                            <li>Thương hiệu: <span><?php echo $product['BrandName'] ?></span></li>
+                        </ul>
+                        <div class="product__details__option">
+                            <div class="quantity">
+                                <div>
+                                    <input class="pro-qty" type="number" value="1" name="quantity">
+                                    <input type="hidden" name="id" value="<?php echo $product['ProductId'] ?>">
+                                </div>
                             </div>
+                          <p>
+                          <button style="color: white" type="submit" class="btn primary-btn">Thêm giỏ hàng</button>
+                          </p>
                         </div>
-                        <a href="#" class="primary-btn">Thêm giỏ hàng</a>
-                        <a href="#" class="heart__btn"><span class="icon_heart_alt"></span></a>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -113,7 +117,7 @@ if (isset($_GET['id'])) {
                                 <h5>Giá <?php echo $value['SellPrice'] . ' $USD' ?></h5>
                                 <div>
                                     <button class="btn primary-btn mt-4">
-                                        <a style="color: white" href="cart_add.php">Thêm giỏ hàng</a>
+                                        <a style="color: white" href="cart.php?id=<?php echo $value['ProductId']?>">Thêm giỏ hàng</a>
                                     </button>
                                 </div>
                             </div>

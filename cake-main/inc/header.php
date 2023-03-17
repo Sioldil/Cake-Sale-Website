@@ -1,6 +1,9 @@
 <?php
     include ($_SERVER['DOCUMENT_ROOT'] . "/lib/user_session.php");
+    session_start();
     User_Session::init();
+
+    $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
 ?>
 <?php
     include_once ($_SERVER['DOCUMENT_ROOT'] . "/lib/database.php");
@@ -128,7 +131,7 @@
                                 </div>
                                 <div class="header__top__right__cart">
                                     <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
-                                    <div class="cart__price">Cart: <span>$0.00</span></div>
+                                    <div class="cart__price">(<?php echo count($cart)?>)</div>
                                 </div>
                             </div>
                         </div>
