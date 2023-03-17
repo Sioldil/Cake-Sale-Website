@@ -27,10 +27,11 @@
           public static function checkSession(){
              self::init();
              if (self::get("user_login") == false) {
-              self::destroy();
-              header("Location:user_login.php");
+               Session::Set == 
              }
           }
+
+
          
           public static function checkLogin(){
              self::init();
@@ -42,7 +43,7 @@
           public static function destroy(){
             session_unset();
             session_destroy();
-            header("Location:user_login.php");
+            header("Location:login.php");
           }
          }
 ?>
