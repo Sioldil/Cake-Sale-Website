@@ -24,7 +24,7 @@ if(isset($_POST['submit'])){
         $id_order = mysqli_insert_id($conn);
         foreach($cart as $value){
             $insert_order_detail = "INSERT INTO `orderdetails`(`ProductId`, `Price`, `Quantity`, `OderId`) VALUES ('$value[id]', $value[sellprice], '$value[quantity]','$id_order')";
-            $res = mysqli_query($conn,$insert_order_detail);
+            $result = mysqli_query($conn,$insert_order_detail);
         }
         unset($_SESSION['cart']);
         header("Location: index.php");
