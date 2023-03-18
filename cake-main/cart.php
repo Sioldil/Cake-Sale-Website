@@ -30,7 +30,6 @@ $item = [
     'quantity'=>$quantity
 ];
 
-
 //add product to carts
 if($action == 'add'){
     if(isset($_SESSION['cart'][$id])){
@@ -50,10 +49,6 @@ if($action == 'delete'){
     unset($_SESSION['cart'][$id]);
 }
 
-
-
 header('location: view_cart.php');
-
-
 
 ?>
