@@ -1,8 +1,7 @@
 <?php
     include ($_SERVER['DOCUMENT_ROOT'] . "/lib/user_session.php");
     session_start();
-    User_Session::init();
-
+    
     $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
 ?>
 <?php
@@ -17,12 +16,21 @@
     $fm = new Format();
     $ct = new Cart();
     $ur = new Users();
+
+
 ?>
 <?php
   header("Cache-Control: no-cache, must-revalidate");
   header("Pragma: no-cache");
   header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
   header("Cache-Control: max-age=2592000");
+
+?>
+
+<?php
+if (isset($_GET['action']) && $_GET['action'] == 'logout') {
+    User_Session::destroy();
+}
 ?>
 <!DOCTYPE html>
 <html lang="zxx">

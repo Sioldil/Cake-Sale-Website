@@ -34,6 +34,11 @@ include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
             </div>
         </div>
     </div>
+
+    <button class="btn btn-success">
+            <a style="color: white;" href="?action=logout">ĐĂNG XUẤT</a>
+    </button>
+
 </section>
 <!-- Hero Section End -->
 
