@@ -1,14 +1,13 @@
 <?php
+    session_start();
     include ($_SERVER['DOCUMENT_ROOT'] . "/lib/user_session.php");
     include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
-    session_start();
     
     $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
 ?>
 
 <!DOCTYPE html>
 <html lang="zxx">
-
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Cake Template">
