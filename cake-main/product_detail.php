@@ -80,7 +80,10 @@ if (isset($_GET['id'])) {
                             </div>
                           <p>
                           <button style="color: white" type="submit" class="btn primary-btn">Thêm giỏ hàng</button>
-                          </p>
+                          <button class="heart__btn"type="submit" class="btn primary-btn">
+                            <span style="color:#F08632; border: 1px solid" class="icon_heart_alt"></span>
+                          </button>
+                        </p>
                         </div>
                     </div>
                 </form>

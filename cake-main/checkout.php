@@ -1,11 +1,37 @@
 <?php
+error_reporting(0);
 include($_SERVER['DOCUMENT_ROOT'] . "/cake-main/inc/header.php");
 
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
 $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
 
-$check_login = User_Session::checkLogin();
+$user = $_SESSION['user'];
+
+if(isset($_POST['submit'])){
+    $id_user = $user['CustomerId'];
+    $address = $_POST['address'];
+    $number_phone = $_POST['number_phone'];
+    $note = $_POST['note'];
+
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
+    $current_date = new DateTime('now');
+    $date_order = $current_date->format("Y-m-d H:i:s");
+
+    $sql = "INSERT INTO oders(CustomerId, Note, order_date, address,number_phone) VALUES ('$id_user','$note','$date_order','$address','$number_phone')";
+    $result = mysqli_query($conn, $sql);
+    if($result){
+        $id_order = mysqli_insert_id($conn);
+        foreach($cart as $value){
+            $insert_order_detail = "INSERT INTO `orderdetails`(`ProductId`, `Price`, `Quantity`, `OderId`) VALUES ('$value[id]', $value[sellprice], '$value[quantity]','$id_order')";
+            $res = mysqli_query($conn,$insert_order_detail);
+        }
+        unset($_SESSION['cart']);
+        header("Location: index.php");
+    }else{
+        echo "<script>alert(`Thanh toán thất bại`) </script>"; 
+    }
+}
 
 ?>
 
@@ -30,19 +56,19 @@ $check_login = User_Session::checkLogin();
 
 <!-- Shop Section Begin -->
 <section class="shop spad">
-    <?php if(!$check_login){  ?>
+    <?php if(isset($_SESSION['user'])){  ?>
     <div class="container">
         <div class="shop__option">
             <div class="row">
                 <div class="col-lg-5 col-md-5">
-                    <form>
+                    <form method="post">
                         <div class="form-group">
                             <label for="full_name">Họ và tên</label>
-                            <input type="text" class="form-control" id="full_name" name="full_name" required placeholder="Nguyễn Văn A">
+                            <input type="text" class="form-control" id="full_name" name="full_name" value="<?php echo $user['Fullname'] ?>" required placeholder="Nguyễn Văn A">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required placeholder="nguyenvana@gmail.com">
+                            <input type="email" class="form-control" id="email" name="email" value="<?php echo $user['Email']?>" required placeholder="nguyenvana@gmail.com">
                         </div>
                         <div class="form-group">
                             <label for="address">Địa chỉ</label>
@@ -55,6 +81,9 @@ $check_login = User_Session::checkLogin();
                         <div class="form-group">
                             <label for="note">Ghi chú</label>
                             <textarea type="text" class="form-control" id="note" name= "note" required placeholder="Hàng dễ vỡ xin nhẹ tay !!!"> </textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success"name= "submit"> Thanh toán</button>
                         </div>
                     </form>
                 </div>
@@ -101,7 +130,7 @@ $check_login = User_Session::checkLogin();
         <div class="alert alert-danger">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <strong>Vui lòng đăng nhập để mua hàng</strong>
-            <a href="login.php">Đăng nhập</a>
+            <a href="login.php?action=checkout">Đăng nhập</a>
         </div>
     <?php } ?>
 </section>

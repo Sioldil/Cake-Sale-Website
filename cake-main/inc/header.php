@@ -1,37 +1,11 @@
 <?php
     include ($_SERVER['DOCUMENT_ROOT'] . "/lib/user_session.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
     session_start();
     
     $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
 ?>
-<?php
-    include_once ($_SERVER['DOCUMENT_ROOT'] . "/lib/database.php");
-    include_once ($_SERVER['DOCUMENT_ROOT'] . "/helpers/format.php");
 
-    spl_autoload_register(function($className){
-        include_once ($_SERVER['DOCUMENT_ROOT']."/classes/".$className.".php");
-    });
-
-    $db = new Database();
-    $fm = new Format();
-    $ct = new Cart();
-    $ur = new Users();
-
-
-?>
-<?php
-  header("Cache-Control: no-cache, must-revalidate");
-  header("Pragma: no-cache");
-  header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
-  header("Cache-Control: max-age=2592000");
-
-?>
-
-<?php
-if (isset($_GET['action']) && $_GET['action'] == 'logout') {
-    User_Session::destroy();
-}
-?>
 <!DOCTYPE html>
 <html lang="zxx">
 
