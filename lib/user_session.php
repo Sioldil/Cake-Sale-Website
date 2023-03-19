@@ -27,22 +27,27 @@
           public static function checkSession(){
              self::init();
              if (self::get("user_login") == false) {
-              self::destroy();
-              header("Location:user_login.php");
+              return false;
              }
+             return true;
           }
          
           public static function checkLogin(){
-             self::init();
-             if (self::get("user_login")== true) {
-              header("Location:index.php");
-             }
+            self::init();
+            if (self::get("user_login")== true) {
+               if(isset($_GET['action'])){
+                  $action = $_GET['action'];
+                  header("Location:'.$action.'.php");
+               }else{
+                  header("Location:index.php");
+               }
+            }
           }
          
           public static function destroy(){
             session_unset();
             session_destroy();
-            header("Location:user_login.php");
+            header("Location:login.php");
           }
          }
 ?>

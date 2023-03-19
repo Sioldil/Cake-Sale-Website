@@ -34,6 +34,11 @@ include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
             </div>
         </div>
     </div>
+
+    <button class="btn btn-success">
+            <a style="color: white;" href="?action=logout">ĐĂNG XUẤT</a>
+    </button>
+
 </section>
 <!-- Hero Section End -->
 
@@ -112,7 +117,7 @@ include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
                             <h5>Giá <?php echo $value['SellPrice'] . ' $USD' ?></h5>
                             <div>
                                 <button class="btn primary-btn mt-4">
-                                    <a style="color: white" href="cart_add.php">Thêm giỏ hàng</a>
+                                    <a style="color: white" href="cart.php?id=<?php echo $value['ProductId'] ?>">Thêm giỏ hàng</a>
                                 </button>
                             </div>
                         </div>

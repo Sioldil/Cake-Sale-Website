@@ -1,29 +1,13 @@
 <?php
+    session_start();
     include ($_SERVER['DOCUMENT_ROOT'] . "/lib/user_session.php");
-    User_Session::init();
+    include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
+    
+    $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
 ?>
-<?php
-    include_once ($_SERVER['DOCUMENT_ROOT'] . "/lib/database.php");
-    include_once ($_SERVER['DOCUMENT_ROOT'] . "/helpers/format.php");
 
-    spl_autoload_register(function($className){
-        include_once ($_SERVER['DOCUMENT_ROOT']."/classes/".$className.".php");
-    });
-
-    $db = new Database();
-    $fm = new Format();
-    $ct = new Cart();
-    $ur = new Users();
-?>
-<?php
-  header("Cache-Control: no-cache, must-revalidate");
-  header("Pragma: no-cache");
-  header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
-  header("Cache-Control: max-age=2592000");
-?>
 <!DOCTYPE html>
 <html lang="zxx">
-
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Cake Template">
@@ -128,7 +112,7 @@
                                 </div>
                                 <div class="header__top__right__cart">
                                     <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
-                                    <div class="cart__price">Cart: <span>$0.00</span></div>
+                                    <div class="cart__price">(<?php echo count($cart)?>)</div>
                                 </div>
                             </div>
                         </div>

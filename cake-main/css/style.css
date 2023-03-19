@@ -69,7 +69,9 @@ h5 {
 h6 {
   font-size: 16px;
 }
-
+.table{
+  text-align: center;
+}
 p {
   font-size: 16px;
   font-family: "Montserrat", sans-serif;
@@ -4030,3 +4032,4 @@ ol {
     display: none;
   }
 }
+
