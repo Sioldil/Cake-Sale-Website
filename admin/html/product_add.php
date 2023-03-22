@@ -35,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-
 ?>
 
 <div class="content-wrapper">
@@ -93,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Số lượng</label>
-                                <input type="number" class="form-control" name="quantity" required />
+                                <input type="number" class="form-control" min="1" name="quantity" required />
                             </div>
                             <div class="mp-3">
                                 <label class="form-label">Trạng thái</label>
