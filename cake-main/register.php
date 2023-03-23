@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-6">
                         <div class="class__sidebar">
-                        <h5 style="font-family: Callephane; margin-left: 200px;"><img src="img/logo_2.png" alt="">Login</h5>
+                        <h5 style="font-family: Callephane; margin-left: 200px;"><img src="img/logo_2.png" alt="">Register</h5>
                         <form action="register.php" method="post">
                             <input type="text" placeholder="Enter your name" name="Fullname">
                             <input type="text" placeholder="Enter your email" name="Email">

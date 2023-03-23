@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="zxx">
-
 <?php
 session_start();
 ?>
+<!DOCTYPE html>
+<html lang="zxx">
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Cake Template">

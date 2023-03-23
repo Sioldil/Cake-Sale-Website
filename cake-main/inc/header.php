@@ -1,6 +1,5 @@
 <?php
 session_start();
-include($_SERVER['DOCUMENT_ROOT'] . "/lib/user_session.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
 $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
@@ -93,28 +92,24 @@ $user = ((isset($_SESSION['user']))) ? $_SESSION['user'] : [];
                                 <a href="./index.html"><img src="img/logo.png" alt=""></a>
                             </div>
                             <div class="header__top__right">
-                                <div class="header__top__right__links">
-                                    <ul class="nav navbar-nav navbar-right">
-                                        <?php if (isset($user['Email'])) { ?>
-                                            <div class="dropdown show">
-                                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <?php echo $user['Fullname'] ?>
-                                                </a>
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="register.php">Đăng Ký</a></li>
-                                                    <li><a href="login.php">Đăng Nhập</a></li>
-                                                </ul>
-                                            </div>
-                                        <?php } else { ?>
-                                            <li class="dropdown">
-                                                <span>Tài Khoản</span>
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="register.php">Đăng Ký</a></li>
-                                                    <li><a href="login.php">Đăng Nhập</a></li>
+                                
+                                <div class="header__top__left">
+                                <ul style="margin-right: 30px;">
+                                <?php if (isset($user['Email'])) { ?>
+                                    <li><?php echo $user['Fullname'] ?>
+                                            <ul>
+                                                <li>setting</li>
+                                                <li>log out</li>
+                                            </ul>
+                                    </li><?php } else { ?><li>
+                                                Tài Khoản
+                                                <ul>
+                                                    <li><a href="register.php" style="color:#ffffff; white-space: nowrap;">Đăng Ký</a></li>
+                                                    <li><a href="login.php" style="color:#ffffff; white-space: nowrap;">Đăng Nhập</a></li>
                                                 </ul>
                                             </li>
                                         <?php } ?>
-                                    </ul>
+                                </ul>
                                 </div>
                                 <div class="header__top__right__cart">
                                     <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
