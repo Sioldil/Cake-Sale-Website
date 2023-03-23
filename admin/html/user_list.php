@@ -45,7 +45,6 @@ $Customers = mysqli_query($conn, $query2);
       <ul class="navbar-nav flex-row align-items-center ms-auto">
         <!-- Place this tag where you want the button to render. -->
         <li class="nav-item lh-1 me-3">
-          <a class="github-button" href="https://github.com/themeselection/sneat-html-admin-template-free" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
         </li>
 
         <!-- User -->
@@ -119,7 +118,7 @@ $Customers = mysqli_query($conn, $query2);
       <!-- Basic Bootstrap Table -->
       <div class="card">
         <div class="table-responsive text-nowrap">
-          <table class="table">
+          <table class="table" style="text-align: center">
             <thead>
               <tr>
                 <th>STT</th>
@@ -128,6 +127,8 @@ $Customers = mysqli_query($conn, $query2);
                 <th>Số điện thoại</th>
                 <th>Địa chỉ</th>
                 <th>Hình ảnh</th>
+                <th>Thời gian đăng nhập</th>
+                <th>Thời gian đăng xuất</th>
                 <th>Chức năng</th>
               </tr>
             </thead>
@@ -143,6 +144,8 @@ $Customers = mysqli_query($conn, $query2);
                   <td>
                     <img src="..//uploads//<?php echo $value['Image'] ?>" alt="" width="100">
                   </td>
+                  <td><?php echo $value['Date_Login']?></td>
+                  <td><?php echo $value['Date_Logout']?></td>
                   <td>
                     <button type="button" class="btn btn-danger">
                       <a style="color: white" ; href="user_delete.php?id=<?php echo $value['CustomerId'] ?>" onclick="return confirm('Bạn có chắc chắn xóa ?')">Xóa</a>

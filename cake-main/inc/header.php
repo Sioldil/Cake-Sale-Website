@@ -1,37 +1,14 @@
 <?php
-    include ($_SERVER['DOCUMENT_ROOT'] . "/lib/user_session.php");
-    session_start();
-    
-    $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
-?>
-<?php
-    include_once ($_SERVER['DOCUMENT_ROOT'] . "/lib/database.php");
-    include_once ($_SERVER['DOCUMENT_ROOT'] . "/helpers/format.php");
+session_start();
+include($_SERVER['DOCUMENT_ROOT'] . "/lib/user_session.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
-    spl_autoload_register(function($className){
-        include_once ($_SERVER['DOCUMENT_ROOT']."/classes/".$className.".php");
-    });
+$cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
 
-    $db = new Database();
-    $fm = new Format();
-    $ct = new Cart();
-    $ur = new Users();
-
-
-?>
-<?php
-  header("Cache-Control: no-cache, must-revalidate");
-  header("Pragma: no-cache");
-  header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
-  header("Cache-Control: max-age=2592000");
+$user = ((isset($_SESSION['user']))) ? $_SESSION['user'] : [];
 
 ?>
 
-<?php
-if (isset($_GET['action']) && $_GET['action'] == 'logout') {
-    User_Session::destroy();
-}
-?>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -44,10 +21,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
     <title>Cake | Template</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -112,34 +87,38 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="header__top__inner">
-                            <!-- <div class="header__top__left">
-                                <ul>
-                                    <li>USD <span class="arrow_carrot-down"></span>
-                                        <ul>
-                                            <li>EUR</li>
-                                            <li>USD</li>
-                                        </ul>
-                                    </li>
-                                    <li>ENG <span class="arrow_carrot-down"></span>
-                                        <ul>
-                                            <li>Spanish</li>
-                                            <li>ENG</li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Sign in</a> <span class="arrow_carrot-down"></span></li>
-                                </ul>
-                            </div> -->
+                            <div class="header__top__left">
+                            </div>
                             <div class="header__logo" style="left: 5%;">
                                 <a href="./index.html"><img src="img/logo.png" alt=""></a>
                             </div>
                             <div class="header__top__right">
                                 <div class="header__top__right__links">
-                                    <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
-                                    <a href="#"><img src="img/icon/heart.png" alt=""></a>
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <?php if (isset($user['Email'])) { ?>
+                                            <div class="dropdown show">
+                                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <?php echo $user['Fullname'] ?>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="register.php">Đăng Ký</a></li>
+                                                    <li><a href="login.php">Đăng Nhập</a></li>
+                                                </ul>
+                                            </div>
+                                        <?php } else { ?>
+                                            <li class="dropdown">
+                                                <span>Tài Khoản</span>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="register.php">Đăng Ký</a></li>
+                                                    <li><a href="login.php">Đăng Nhập</a></li>
+                                                </ul>
+                                            </li>
+                                        <?php } ?>
+                                    </ul>
                                 </div>
                                 <div class="header__top__right__cart">
                                     <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
-                                    <div class="cart__price">(<?php echo count($cart)?>)</div>
+                                    <div class="cart__price">(<?php echo count($cart) ?>)</div>
                                 </div>
                             </div>
                         </div>

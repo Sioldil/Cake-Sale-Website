@@ -29,15 +29,19 @@
              if (self::get("user_login") == false) {
               return false;
              }
+             return true;
           }
-
-
          
           public static function checkLogin(){
-             self::init();
-             if (self::get("user_login")== true) {
-              header("Location:index.php");
-             }
+            self::init();
+            if (self::get("user_login")== true) {
+               if(isset($_GET['action'])){
+                  $action = $_GET['action'];
+                  header("Location:'.$action.'.php");
+               }else{
+                  header("Location:index.php");
+               }
+            }
           }
          
           public static function destroy(){
