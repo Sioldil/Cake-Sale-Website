@@ -1,18 +1,15 @@
-<?php
-error_reporting(0);
+<?php 
+ob_start();
 include($_SERVER['DOCUMENT_ROOT'] . "/cake-main/inc/header.php");
 
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
 include($_SERVER['DOCUMENT_ROOT'] . "/classes/cart.php");
 
+?>
 
-
-$cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
-
+<?php
 $user = $_SESSION['user'];
-
-
 $class = new Cart();
 $cart_totals = $class->total_price($cart);
 
@@ -35,11 +32,11 @@ if (isset($_POST['submit'])) {
             $insert_order_detail = "INSERT INTO `orderdetails`(`Order_Detail_Id`,`ProductId`, `Price`, `Quantity`) VALUES ('$id_order','$value[id]', $value[sellprice], '$value[quantity]')";
             mysqli_query($conn, $insert_order_detail);
         }
-    }
-    unset($_SESSION['cart']);
-    header("Location:index.php");
-}
 
+        unset($_SESSION['cart']);
+        header("location:index.php");
+    }
+}
 ?>
 
 <div class="breadcrumb-option">
@@ -94,9 +91,9 @@ if (isset($_POST['submit'])) {
                             </div>
                         </form>
                     </div>
-                    <div class="col-lg-2 col-md-2">
+                    <div class="col-lg-1 col-md-1">
                     </div>
-                    <div class="col-lg-5 col-md-5">
+                    <div class="col-lg-6 col-md-6">
                         <div class="table-responsive text-nowrap">
                             <h4>Thông tin chi tiết đơn hàng</h4>
                             <table class="table" style="text-align: center">

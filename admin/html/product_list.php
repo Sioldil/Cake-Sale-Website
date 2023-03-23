@@ -137,6 +137,12 @@ $Category = mysqli_query($conn, $query3);
           <?php } ?>
         </select>
       </form>
+
+            <form action="products_search.php" class="form-control">
+              <input placeholder="tim kiem" name="key" type="text">
+              <button>Tim kiem</button>
+            </form>
+            
       <!-- Basic Bootstrap Table -->
       <div class="card">
         <div class="table-responsive text-nowrap">
