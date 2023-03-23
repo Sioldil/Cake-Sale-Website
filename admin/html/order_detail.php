@@ -3,46 +3,36 @@ include($_SERVER["DOCUMENT_ROOT"] . '/admin/inc/header.php');
 include($_SERVER['DOCUMENT_ROOT'] . "/admin/inc/navbar.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
-if(isset($_GET['id'])){
-    $id = $_GET['id'];
+if (isset($_GET['id'])) {
+    $id_order = $_GET['id'];
 
-    $query = "SELECT *FROM Products p, Category c,Brands b where p.status = 1 and c.status = 1 and p.BrandId = b.BrandId
-                and c.CategoryId = p.CategoriId and CategoryId = '$id' ORDER BY CountView DESC";
-    $Products = mysqli_query($conn, $query);
+    $query = "SELECT * FROM oders where OderId = '$id_order'";
+    $order_query = mysqli_query($conn, $query);
+    $order = mysqli_fetch_assoc($order_query);
 
-$total = mysqli_num_rows($Products);
+    $id_custommer = $order['CustomerId'];
 
-$limit = 5;
+    $custommer_query = mysqli_query($conn, "SELECT * from customers where CustomerId = '$id_custommer'");
+    $customer = mysqli_fetch_assoc($custommer_query);
 
-$page = ceil($total / $limit);
+    $products_query = "SELECT a.Quantity, a.Price, p.Image, p.Name  FROM orderdetails a, products p, oders o 
+                where a.ProductId = p.ProductId and  o.OderId = '$id_order'";
+    $products = mysqli_query($conn, $products_query);
 
-$cr_page = (isset($_GET['page']) ? $_GET['page'] : 1);
-
-$start = ($cr_page - 1) * $limit;
-
-$query2 = "SELECT a.ProductId, a.Name, a.Image, c.CategoryName, b.BrandName, a.BuyPrice,a.SellPrice, a.CountView, a.Status 
-              FROM `products` a, category c, brands b 
-              WHERE a.CategoriId = c.CategoryId and a.BrandId = b.BrandId and c.CategoryId = '$id'
-              ORDER BY a.CountView DESC
-              LIMIT $start,$limit";
-
-$Products = mysqli_query($conn, $query2);
-
-
-$query3 = "SELECT *FROM  Category where status = 1";
-$Category = mysqli_query($conn, $query3);
-
-$query4 = "SELECT *FROM  Category where status = 1 and CategoryId = '$id'  ";
-$test = mysqli_query($conn, $query4);
-
-$data = mysqli_fetch_assoc($test);
-
-
-
-
+    if (isset($_POST['submit'])) {
+        $status = $_POST['status'];
+        $query = "UPDATE oders set status = '$status' WHERE  OderId = '$id_order'";
+        $result = mysqli_query($conn, $query);
+        if ($result) {
+            header("Location: order_list.php");
+        } else {
+            echo "xảy ra lỗi";
+        }
+    }
 }
-?>
 
+
+?>
 <div class="layout-page">
     <!-- Navbar -->
 
@@ -134,114 +124,80 @@ $data = mysqli_fetch_assoc($test);
     <div class="content-wrapper">
         <!-- Content -->
         <div class="container-xxl flex-grow-1 container-p-y">
-            <h4 class="fw-bold py-3 mb-4">Danh sách sản phẩm</h4>
-            <form action="" method="GET">
-                <select name="id_category" id="id_category" onchange="location = this.value;">
-                    <option value=""><?php echo $data['CategoryName'] ?></option>
-                                    <?php foreach ($Category as $key => $value) { ?>
-                                        <option value='view_product_by_id_category.php?id=<?php echo $value["CategoryId"] ?>'>
-                            <?php echo $value["CategoryName"] ?>
-                    </option>
-                        <?php } ?>
-                </select>
-            </form>
+            <div class="row">
+                <div class="panel panel-infor">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Thông tin khách hàng</h3>
+                    </div>
+                    <div class="panel-body text-left">
+                        <p>Tên khách hàng: <?php echo $customer['Fullname'] ?></p>
+                        <p>Số điện thoại: <?php echo $order['number_phone'] ?></p>
+                        <p>Địa chỉ nhận hàng: <?php echo $order['address'] ?></p>
+                        <p>Ngày đặt hàng: <?php echo $order['order_date'] ?></p>
+                        <p>Ghi chú của khách hàng: <?php echo $order['Note'] ?> </p>
+                        <p>Trạng thái đơn hàng:
+                            <?php if ($order['status'] == 0) { ?>
+                                chưa xử lý
+                            <?php } else if ($order['status'] == 1) { ?>
+                                đang xử lý
+                            <?php } else if ($order['status'] == 2) { ?>
+                                thành công
+                            <?php } ?>
+                        </p>
+                    </div>
+                </div>
+            </div>
             <!-- Basic Bootstrap Table -->
+            <div class="panel-heading">
+                <h3 class="panel-title">Thông tin chi tiết đơn hàng</h3>
+            </div>
             <div class="card">
                 <div class="table-responsive text-nowrap">
-                    <table class="table">
+
+                    <table class="table" style="text-align: center">
                         <thead>
                             <tr>
                                 <th>STT</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Hình ảnh</th>
-                                <th>Loại bánh</th>
-                                <th>Thương hiệu</th>
-                                <th>Giá nhập</th>
-                                <th>Giá bán</th>
-                                <th>Số lượt xem</th>
-                                <th>Trạng thái</th>
-                                <th>Chức năng</th>
+                                <th>Số lượng</th>
+                                <th>Giá</th>
+                                <th>Thành tiền</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
                             <?php
-                            foreach ($Products as $key => $value) : ?>
+                            $total_price = 0;
+                            foreach ($products as $key => $value) : $total_price += $value['Price']  * $value['Quantity']; ?>
                                 <tr>
                                     <td><?php echo $key + 1 ?></td>
                                     <td><?php echo $value['Name'] ?></td>
                                     <td>
                                         <img src="..//uploads//<?php echo $value['Image'] ?>" alt="" width="100">
                                     </td>
-                                    <td><?php echo $value['CategoryName'] ?></td>
-                                    <td><?php echo $value['BrandName'] ?></td>
-                                    <td><?php echo $value['BuyPrice'] ?></td>
-                                    <td><?php echo $value['SellPrice'] ?></td>
-                                    <td><?php echo $value['CountView'] ?></td>
-                                    <?php if ($value['Status'] == 1) { ?>
-                                        <td>Hiện</td>
-                                    <?php } else { ?>
-                                        <td>Ẩn</td>
-                                    <?php } ?>
-                                    <td>
-                                        <button type="button" class="btn btn-primary">
-                                            <a style="color: white" ; href="product_update.php?id=<?php echo $value['ProductId'] ?>">Sửa</a>
-                                        </button>
-                                        <button type="button" class="btn btn-danger">
-                                            <a style="color: white" ; href="product_delete.php?id=<?php echo $value['ProductId'] ?>" onclick="return confirm('Bạn có chắc chắn xóa ?')">Xóa</a>
-                                        </button>
-                                    </td>
+                                    <td><?php echo $value['Quantity'] ?></td>
+                                    <td><?php echo $value['Price'] ?></td>
+                                    <td><?php echo $value['Quantity'] * $value['Price']  ?></td>
                                 </tr>
                             <?php endforeach; ?>
+                            <tr>
+                                <td>Tổng tiền: </td>
+                                <td class="bg-infor"><?php echo $total_price ?> usd</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="mt-4">
-        <button type="button" class="btn btn-success">
-          <a style="color: white" ; href="product_list.php">Quay Lại</a>
-        </button>
-      </div>
-            <?php if ($page > 1) { ?>
-                <hr>
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        <?php
-                        if ($cr_page - 1 > 0) {
-                        ?>
-                            <li class="page-item first">
-                                <a class="page-link" href="product_list.php?page=1"><i class="tf-icon bx bx-chevrons-left"></i></a>
-                            </li>
-                            <li class="page-item prev">
-                                <a class="page-link" href="product_list.php?page=<?php echo $cr_page - 1 ?>"><i class="tf-icon bx bx-chevron-left"></i></a>
-                            </li>
-                        <?php
-                        }
-                        ?>
-                        <?php for ($i = 1; $i <= $page; $i++) { ?>
-                            <li class="page-item  <?php echo (($cr_page == $i) ? 'active' : '') ?>">
-                                <a class="page-link" href="product_list.php?page=<?php echo $i ?>"><?php echo $i ?></a>
-                            </li>
-                        <?php
-                        }
-                        ?>
-                        </li>
-                        <?php
-                        if ($cr_page + 1 <= $page) {
-                        ?>
-                            <li class="page-item next">
-                                <a class="page-link" href="product_list.php?page=<?php echo $cr_page + 1 ?>"><i class="tf-icon bx bx-chevron-right"></i></a>
-                            </li>
-                            <li class="page-item last">
-                                <a class="page-link" href="product_list.php?page=<?php echo $page ?>"><i class="tf-icon bx bx-chevrons-right"></i></a>
-                            </li>
-                        <?php
-                        }
-                        ?>
-                    </ul>
-                </nav>
-            <?php
-            }
-            ?>
+            <form method="POST">
+                <div class="form-group">
+                    <select name="status" id="" required>
+                        <option name="status" value="0">Chưa xử lý</option>
+                        <option name="status" value="1">Đang xử lý</option>
+                        <option name="status" value="2">Đã xử lý</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" type="submit" name="submit">Cập nhật</button>
+            </form>
         </div>
     </div>
     <?php

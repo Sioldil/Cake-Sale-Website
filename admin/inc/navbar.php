@@ -53,50 +53,46 @@
           <li class="menu-item">
             <a href="index.php" class="menu-link">
               <i class="menu-icon tf-icons bx bx-home-circle"></i>
-              <div data-i18n="Analytics">Dashboard</div>
+              <div data-i18n="Analytics">Bảng điều khiển</div>
             </a>
           </li>
 
-          <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Datas</span>
-          </li>
           <!-- Category -->
           <li class="menu-item">
             <a href="category_list.php?page=1" class="menu-link">
               <i class="menu-icon tf-icons bx bx-collection"></i>
-              <div data-i18n="Basic">Categories</div>
+              <div data-i18n="Basic">Loại bánh</div>
             </a>  
           </li>
           <li class="menu-item">
             <a href="brand_list.php?page=1" class="menu-link">
               <i class="menu-icon tf-icons bx bx-collection"></i>
-              <div data-i18n="Basic">Brands</div>
+              <div data-i18n="Basic">Thương hiệu</div>
             </a>
           </li>
           <li class="menu-item">
             <a href="product_list.php?page=1" class="menu-link">
               <i class="menu-icon tf-icons bx bx-collection"></i>
-              <div data-i18n="Basic">Products</div>
+              <div data-i18n="Basic">Sản phẩm</div>
             </a>
           </li>
           <li class="menu-item">
             <a href="order_list.php" class="menu-link">
               <i class="menu-icon tf-icons bx bx-collection"></i>
-              <div data-i18n="Basic">Orders</div>
+              <div data-i18n="Basic">Đơn đặt hàng</div>
             </a>
           </li>
           <!-- Users -->
-          <li class="menu-header small text-uppercase"><span class="menu-header-text">Users</span></li>
           <li class="menu-item">
             <a href="user_list.php" class="menu-link">
               <i class="menu-icon tf-icons bx bx-collection"></i>
-              <div data-i18n="Basic">User</div>
+              <div data-i18n="Basic">Người dùng</div>
             </a>
           </li>     
           <li class="menu-item">
             <a href="contact_list.php" class="menu-link">
               <i class="menu-icon tf-icons bx bx-collection"></i>
-              <div data-i18n="Basic">Contacts</div>
+              <div data-i18n="Basic">Liên lạc</div>
             </a>
           </li>    
             </ul>

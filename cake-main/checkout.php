@@ -4,9 +4,17 @@ include($_SERVER['DOCUMENT_ROOT'] . "/cake-main/inc/header.php");
 
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
+include($_SERVER['DOCUMENT_ROOT'] . "/classes/cart.php");
+
+
+
 $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
 
 $user = $_SESSION['user'];
+
+
+$class = new Cart();
+$cart_totals = $class->total_price($cart);
 
 if (isset($_POST['submit'])) {
     $id_user = $user['CustomerId'];
@@ -18,19 +26,18 @@ if (isset($_POST['submit'])) {
     $current_date = new DateTime('now');
     $date_order = $current_date->format("Y-m-d H:i:s");
 
-    $sql = "INSERT INTO oders(CustomerId, Note, order_date, address,number_phone) VALUES ('$id_user','$note','$date_order','$address','$number_phone')";
+    $sql = "INSERT INTO oders(CustomerId, Note, order_date, address,number_phone,total_price) VALUES ('$id_user','$note','$date_order','$address','$number_phone','$cart_totals')";
     $result = mysqli_query($conn, $sql);
+
     if ($result) {
         $id_order = mysqli_insert_id($conn);
         foreach ($cart as $value) {
-            $insert_order_detail = "INSERT INTO `orderdetails`(`ProductId`, `Price`, `Quantity`, `OderId`) VALUES ('$value[id]', $value[sellprice], '$value[quantity]','$id_order')";
-            $result = mysqli_query($conn, $insert_order_detail);
+            $insert_order_detail = "INSERT INTO `orderdetails`(`Order_Detail_Id`,`ProductId`, `Price`, `Quantity`) VALUES ('$id_order','$value[id]', $value[sellprice], '$value[quantity]')";
+            mysqli_query($conn, $insert_order_detail);
         }
-        unset($_SESSION['cart']);
-        header('Location:index.php');
-    } else {
-        echo "<script>alert(`Thanh toán thất bại`) </script>";
     }
+    unset($_SESSION['cart']);
+    header("Location:index.php");
 }
 
 ?>
@@ -104,10 +111,7 @@ if (isset($_POST['submit'])) {
                                 <tbody class="table-border-bottom-0">
                                     <?php
                                     $stt = 1;
-                                    $total_price = 0;
-                                    foreach ($cart as $key => $value) :
-                                        $total_price += $value['sellprice']  * $value['quantity'];
-                                    ?>
+                                    foreach ($cart as $key => $value) : ?>
                                         <tr>
                                             <td><?php echo $stt++ ?></td>
                                             <td><?php echo $value['name'] ?></td>
@@ -117,7 +121,7 @@ if (isset($_POST['submit'])) {
                                     <?php endforeach; ?>
                                     <tr>
                                         <td>Tổng tiền</td>
-                                        <td colspan="6" class="text-center bg-infor"><?php echo $total_price ?> usd</td>
+                                        <td colspan="6" class="text-center bg-infor"><?php echo $cart_totals ?> usd</td>
                                     </tr>
                                 </tbody>
                             </table>

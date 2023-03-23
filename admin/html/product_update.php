@@ -6,10 +6,10 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
 
-    $sql1 = "SELECT * FROM category";
+    $sql1 = "SELECT * FROM category where status = 1";
     $categorys = mysqli_query($conn, $sql1);
 
-    $sql2 = "SELECT * FROM brands";
+    $sql2 = "SELECT * FROM brands where status = 1";
     $brands = mysqli_query($conn, $sql2);
 
     $query = "SELECT * FROM Products Where ProductId = '$id'";
@@ -66,11 +66,10 @@ if (isset($_POST['submit'])) {
                          `BuyPrice`='$buy_price',`SellPrice`='$sell_price',`Status`='$status',`CategoriId`='$id_categories',`BrandId`='$id_brands' WHERE ProductId = '$id'";
             $update = mysqli_query($conn, $query);
         }
-
         if ($update) {
             header("location:product_list.php");
         } else {
-            echo "Xảy ra lỗi khi thêm mới";
+            echo "Xảy ra lỗi khi cập nhật";
         }
     }
 }
@@ -82,7 +81,7 @@ if (isset($_POST['submit'])) {
 <div class="content-wrapper">
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"> Thêm mới sản phẩm</h4>
+        <h4 class="fw-bold py-3 mb-4"> Cập nhật sản phẩm</h4>
         <!-- Basic Layout -->
         <div class="row">
             <div class="col-xl">

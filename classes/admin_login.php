@@ -31,7 +31,7 @@ class admin_login
             $alert = "User and Pass can't be empty";
             return $alert;
         } else {
-            $query = "SELECT * FROM admin WHERE Email = '$Email' AND Password	= '$Hash_Pass' LIMIT 1";
+            $query = "SELECT * FROM admin WHERE Email = '$Email' AND Password = '$Hash_Pass' LIMIT 1";
             $result = $this->db->select($query);
 
             if ($result != false) {
