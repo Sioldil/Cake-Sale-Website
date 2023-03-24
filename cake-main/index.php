@@ -2,8 +2,6 @@
 include($_SERVER['DOCUMENT_ROOT'] . "/cake-main/inc/header.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
-
-
     $query = "SELECT *FROM Products where status = 1 order by CountView desc";
     $Products = mysqli_query($conn, $query);
 
@@ -36,11 +34,6 @@ include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
             </div>
         </div>
     </div>
-
-    <button class="btn btn-success">
-            <a style="color: white;" href="logout.php">ĐĂNG XUẤT</a>
-    </button>
-    <span><?php echo $user['Email']?></span>
 
 </section>
 <!-- Hero Section End -->

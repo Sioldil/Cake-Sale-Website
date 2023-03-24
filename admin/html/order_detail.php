@@ -32,7 +32,6 @@ if (isset($_GET['id'])) {
     }
 }
 
-
 ?>
 <div class="layout-page">
     <!-- Navbar -->

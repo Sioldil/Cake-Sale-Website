@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(0);
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
 $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
