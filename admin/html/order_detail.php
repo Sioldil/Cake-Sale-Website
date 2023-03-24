@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include($_SERVER["DOCUMENT_ROOT"] . '/admin/inc/header.php');
 include($_SERVER['DOCUMENT_ROOT'] . "/admin/inc/navbar.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
@@ -24,7 +25,7 @@ if (isset($_GET['id'])) {
         $query = "UPDATE oders set status = '$status' WHERE  OderId = '$id_order'";
         $result = mysqli_query($conn, $query);
         if ($result) {
-            header("Location: order_list.php");
+            header("location: order_list.php");
         } else {
             echo "xảy ra lỗi";
         }

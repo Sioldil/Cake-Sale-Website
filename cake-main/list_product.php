@@ -40,21 +40,21 @@ $Category = mysqli_query($conn, $query1);
             <div class="row">
                 <div class="col-lg-7 col-md-7">
                     <div class="shop__option__search">
-                        <form action="" method="GET">
+                        <form action="search_product.php" method="GET">
                             <select name="id_category" id="id_category" onchange="location = this.value;">
                                 <option value="">Loại bánh</option>
                                 <?php foreach ($Category as $key => $value) { ?>
                                     <option value='list_product_by_category.php?id=<?php echo $value["CategoryId"] ?>'>
-                                   <?php echo $value["CategoryName"] ?>
+                                        <?php echo $value["CategoryName"] ?>
                                     </option>
                                 <?php } ?>
                             </select>
-                        </form>
-
-                        <form action="search_product.php?key=" method="GET">
-                            <input type="text" placeholder="Search" name="key" class="fa fa-search">
+                                <input type="text" name="key" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                                <button type="button"  name="search" class="btn btn-outline-primary">Tìm kiếm
+                                </button>
                         </form>
                     </div>
+
                 </div>
                 <div class="col-lg-5 col-md-5">
                     <div class="shop__option__right">
