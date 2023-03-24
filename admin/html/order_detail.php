@@ -17,7 +17,7 @@ if (isset($_GET['id'])) {
     $customer = mysqli_fetch_assoc($custommer_query);
 
     $products_query = "SELECT a.Quantity, a.Price, p.Image, p.Name  FROM orderdetails a, products p, oders o 
-                where a.ProductId = p.ProductId  and a.Order_Detail_Id=o.OderId and  o.OderId = '$id_order'";
+                where a.ProductId = p.ProductId  and a.Order_Detail_Id = o.OderId and o.OderId = '$id_order'";
     $products = mysqli_query($conn, $products_query);
 
     if (isset($_POST['submit'])) {
@@ -31,7 +31,6 @@ if (isset($_GET['id'])) {
         }
     }
 }
-
 
 ?>
 <div class="layout-page">

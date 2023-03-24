@@ -9,8 +9,8 @@ include($_SERVER['DOCUMENT_ROOT'] . "/classes/cart.php");
 if(isset($_SESSION['user'])){
     $user = $_SESSION['user'];
     $id_user = $user['CustomerId'];
-    $query = "SELECT * FROM `oders` o, orderdetails a, products p 
-                where o.OderId = a.Order_Detail_Id and p.ProductId = a.ProductId and o.CustomerId = '$id_user'";
+    $query = "SELECT o.order_date, o.status, a.Quantity, p.Name, a.Price, p.Image FROM `oders` o, orderdetails a, products p, customers c
+              where o.OderId = a.Order_Detail_Id and p.ProductId = a.ProductId and o.CustomerId = c.CustomerId  and o.CustomerId = '$id_user'";
     $data = mysqli_query($conn, $query);
     $order = mysqli_fetch_assoc($data);
 }else{
@@ -25,10 +25,8 @@ if(isset($_SESSION['user'])){
                 <div class="breadcrumb__text">
                     <h2>Lịch Sử Mua Hàng</h2>
                 </div>
-                <div class="breadcrumb__text mt-4" >
-                    <p>Ngày đặt hàng: <?php echo $order['order_date'] ?> </p>
-                </div>
-                <p>Trạng thái đơn hàng:
+                
+                <h4 class="mt-4"></h4>Trạng thái đơn hàng:
                             <?php if ($order['status'] == 0) { ?>
                                 Chưa xử lý
                             <?php } else if ($order['status'] == 1) { ?>
@@ -36,7 +34,7 @@ if(isset($_SESSION['user'])){
                             <?php } else if ($order['status'] == 2) { ?>
                                 Thành công
                  <?php } ?>
-                </p>
+                </h4>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="breadcrumb__links">
@@ -62,6 +60,7 @@ if(isset($_SESSION['user'])){
                 <th>STT</th>
                 <th>Tên sản phẩm</th>
                 <th>Hình ảnh</th>
+                <th>Ngày đặt hàng</th>
                 <th>Số lượng</th>
                 <th>Đơn giá</th>
                 <th>Thành tiền</th>
@@ -80,6 +79,7 @@ if(isset($_SESSION['user'])){
                   <td>
                     <img src="..//admin//uploads//<?php echo $value['Image'] ?>" alt="" width="120">
                   </td>
+                    <td><?php echo $value['order_date']?></td>
                     <td><?php echo $value['Quantity']?></td>
                     <td><?php echo $value['Price']?></td>
                     <td><?php echo $value['Price']  * $value['Quantity']?> USD</td>
