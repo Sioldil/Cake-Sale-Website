@@ -189,14 +189,14 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
             <form method="POST">
-                <div class="form-group">
+                <div class="form-group mt-4">
                     <select name="status" id="" required>
                         <option name="status" value="0">Chưa xử lý</option>
                         <option name="status" value="1">Đang xử lý</option>
                         <option name="status" value="2">Đã xử lý</option>
                     </select>
                 </div>
-                <button class="btn btn-primary" type="submit" name="submit">Cập nhật</button>
+                <button class="mt-4 btn btn-primary" type="submit" name="submit">Cập nhật</button>
             </form>
         </div>
     </div>

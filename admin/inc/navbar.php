@@ -38,7 +38,7 @@
                 </g>
               </svg>
             </span>
-            <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+            <span class="app-brand-text demo menu-text fw-bolder ms-2">cake-sale</span>
           </a>
 
           <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -60,13 +60,13 @@
           <!-- Category -->
           <li class="menu-item">
             <a href="category_list.php?page=1" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-collection"></i>
+              <i class="menu-icon tf-icons bx bx-layout"></i>
               <div data-i18n="Basic">Loại bánh</div>
             </a>  
           </li>
           <li class="menu-item">
             <a href="brand_list.php?page=1" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-collection"></i>
+              <i class="menu-icon tf-icons bx bx-cube-alt"></i>
               <div data-i18n="Basic">Thương hiệu</div>
             </a>
           </li>
@@ -78,20 +78,20 @@
           </li>
           <li class="menu-item">
             <a href="order_list.php" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-collection"></i>
+              <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Basic">Đơn đặt hàng</div>
             </a>
           </li>
           <!-- Users -->
           <li class="menu-item">
             <a href="user_list.php" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-collection"></i>
+              <i class="menu-icon tf-icons bx bx-dock-top"></i>
               <div data-i18n="Basic">Người dùng</div>
             </a>
           </li>     
           <li class="menu-item">
             <a href="contact_list.php" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-collection"></i>
+              <i class="menu-icon tf-icons bx bx-table"></i>
               <div data-i18n="Basic">Liên lạc</div>
             </a>
           </li>    
@@ -99,32 +99,7 @@
           </li>
 
           <!-- Extended components -->
-          <li class="menu-item">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-copy"></i>
-              <div data-i18n="Extended UI">Extended UI</div>
-            </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="extended-ui-perfect-scrollbar.html" class="menu-link">
-                  <div data-i18n="Perfect Scrollbar">Perfect scrollbar</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="extended-ui-text-divider.html" class="menu-link">
-                  <div data-i18n="Text Divider">Text Divider</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="menu-item">
-            <a href="icons-boxicons.html" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-crown"></i>
-              <div data-i18n="Boxicons">Boxicons</div>
-            </a>
-          </li>         
-
+        
           
         </ul>
       </aside>
