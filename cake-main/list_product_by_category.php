@@ -6,7 +6,7 @@ include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    $query = "SELECT *FROM Products p, Category c where p.status = 1 and c.status = 1
+    $query = "SELECT *FROM Products p, Category c where p.status = 1 and c.status = 1 and is_accept = 1
      and c.CategoryId = p.CategoriId and CategoryId = '$id'";
     $Products = mysqli_query($conn, $query);
 

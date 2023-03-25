@@ -5,7 +5,7 @@ include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
 $query = "SELECT a.ProductId, a.Name, a.Image, c.CategoryName, b.BrandName, a.BuyPrice,a.SellPrice, a.CountView, a.Status 
               FROM `products` a, category c, brands b 
-              WHERE a.CategoriId = c.CategoryId and a.BrandId = b.BrandId 
+              WHERE a.CategoriId = c.CategoryId and a.BrandId = b.BrandId and is_accept = 1
               ORDER BY a.ProductId DESC";
 
 $Products = mysqli_query($conn, $query);
@@ -22,7 +22,7 @@ $start = ($cr_page - 1) * $limit;
 
 $query2 = "SELECT a.ProductId, a.Name, a.Image, c.CategoryName, b.BrandName, a.BuyPrice,a.SellPrice, a.CountView, a.Status 
               FROM `products` a, category c, brands b 
-              WHERE a.CategoriId = c.CategoryId and a.BrandId = b.BrandId
+              WHERE a.CategoriId = c.CategoryId and a.BrandId = b.BrandId and is_accept = 1
               ORDER BY CountView DESC
               LIMIT $start,$limit";
 
