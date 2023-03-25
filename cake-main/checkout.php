@@ -32,9 +32,12 @@ if (isset($_POST['submit'])) {
             $insert_order_detail = "INSERT INTO `orderdetails`(`Order_Detail_Id`,`ProductId`, `Price`, `Quantity`) VALUES ('$id_order','$value[id]', $value[sellprice], '$value[quantity]')";
             mysqli_query($conn, $insert_order_detail);
         }
-
         unset($_SESSION['cart']);
         header("location:index.php");
+    }else{
+        echo '<script language="javascript">';
+        echo 'alert("Đặt hàng thất bại!!!")';
+        echo '</script>';
     }
 }
 ?>
