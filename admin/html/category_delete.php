@@ -13,6 +13,4 @@
     }else{
         echo "xảy ra lỗi khi xóa";
     }
-
-
 ?>
