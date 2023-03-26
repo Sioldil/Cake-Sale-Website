@@ -29,10 +29,10 @@
   $data = mysqli_fetch_assoc($orders);
   $quantity_orders = implode($data);
 
-  $query5 = "SELECT Count(*) FROM products where status = 1 and is_accept = 1";
-  $products = mysqli_query($conn, $query5);
-  $data = mysqli_fetch_assoc($products);
-  $quantity_products = implode($data);
+  // $query5 = "SELECT Count(*) FROM products where status = 1 and is_accept = 1";
+  // $products = mysqli_query($conn, $query5);
+  // $data = mysqli_fetch_assoc($products);
+  // $quantity_products = implode($data);
 
 
 $query = "SELECT o.OderId, o.number_phone, o.order_date, o.note, o.address, c.Fullname, o.total_price, o.status
