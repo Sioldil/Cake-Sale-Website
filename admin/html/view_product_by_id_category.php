@@ -136,7 +136,7 @@ $data = mysqli_fetch_assoc($test);
         <div class="container-xxl flex-grow-1 container-p-y">
             <h4 class="fw-bold py-3 mb-4">Danh sách sản phẩm</h4>
             <form action="" method="GET">
-                <select name="id_category" id="id_category" onchange="location = this.value;">
+                <select name="id_category" class ="mb-4" id="id_category" onchange="location = this.value;">
                     <option value=""><?php echo $data['CategoryName'] ?></option>
                                     <?php foreach ($Category as $key => $value) { ?>
                                         <option value='view_product_by_id_category.php?id=<?php echo $value["CategoryId"] ?>'>

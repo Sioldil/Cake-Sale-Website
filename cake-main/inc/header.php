@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(0);
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
 $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
@@ -98,8 +99,9 @@ $user = ((isset($_SESSION['user']))) ? $_SESSION['user'] : [];
                                 <?php if (isset($user['Email'])) { ?>
                                     <li><?php echo $user['Fullname'] ?>
                                             <ul>
-                                                <li>setting</li>
-                                                <li>log out</li>
+                                                <li>Setting</li>
+                                                <li><a style="color:#ffffff; white-space: nowrap;" href="history_order.php">Last Order</a></li>
+                                                <li><a style="color:#ffffff; white-space: nowrap;" href="logout.php">Log out</a></li>
                                             </ul>
                                     </li><?php } else { ?><li>
                                                 Tài Khoản
@@ -139,8 +141,8 @@ $user = ((isset($_SESSION['user']))) ? $_SESSION['user'] : [];
                                     <li><a href="./blog-details.html">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                          
+                            <li><a href="./contact_add.php">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
