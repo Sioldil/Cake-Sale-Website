@@ -1,10 +1,12 @@
-<?php 
+<?php
 ob_start();
 include($_SERVER['DOCUMENT_ROOT'] . "/cake-main/inc/header.php");
-
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
-
 include($_SERVER['DOCUMENT_ROOT'] . "/classes/cart.php");
+
+include($_SERVER['DOCUMENT_ROOT'] . "/cake-main/PHPMailer-master/src/PHPMailer.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/cake-main/PHPMailer-master/src/SMTP.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/cake-main/PHPMailer-master/src/Exception.php");
 
 ?>
 
@@ -32,9 +34,46 @@ if (isset($_POST['submit'])) {
             $insert_order_detail = "INSERT INTO `orderdetails`(`Order_Detail_Id`,`ProductId`, `Price`, `Quantity`) VALUES ('$id_order','$value[id]', $value[sellprice], '$value[quantity]')";
             mysqli_query($conn, $insert_order_detail);
         }
+
+        $mail = new PHPMailer\PHPMailer\PHPMailer(true);  //true: enables exceptions
+        try {
+            $mail->SMTPDebug = 2;  // 0,1,2: chế độ debug. khi mọi cấu hình đều tớt thì chỉnh lại 0 nhé
+            $mail->isSMTP();
+            $mail->CharSet  = "utf-8";
+            $mail->Host = 'smtp.gmail.com';  //SMTP servers
+            $mail->SMTPAuth = true; // Enable authentication
+            $nguoigui = 'cake.sale.12345@gmail.com';
+            $matkhau = 'ndhung123';
+            $tennguoigui = 'cake sale';
+            $mail->Username = $nguoigui; // SMTP username
+            $mail->Password = $matkhau;   // SMTP password
+            $mail->SMTPSecure = 'ssl';  // encryption TLS/SSL 
+            $mail->Port = 465;  // port to connect to                
+            $mail->setFrom($nguoigui, $tennguoigui);
+            $to = "16.05.01h@gmail.com"; // nhập email của người nhân
+            $to_name = "hung"; // tên người nhận
+
+            $mail->addAddress($to, $to_name); //mail và tên người nhận  
+            $mail->isHTML(true);  // Set email format to HTML
+            $mail->Subject = 'Gửi thư từ php';
+            $noidungthu = "<b>Chào bạn!</b><br>Chúc an lành!";
+            $mail->Body = $noidungthu;
+            $mail->smtpConnect(array(
+                "ssl" => array(
+                    "verify_peer" => false,
+                    "verify_peer_name" => false,
+                    "allow_self_signed" => true
+                )
+            ));
+            $mail->send();
+            echo 'Đã gửi mail xong';
+        } catch (Exception $e) {
+            echo 'Mail không gửi được. Lỗi: ', $mail->ErrorInfo;
+        }
+        
         unset($_SESSION['cart']);
         header("location:index.php");
-    }else{
+    } else {
         echo '<script language="javascript">';
         echo 'alert("Đặt hàng thất bại!!!")';
         echo '</script>';
