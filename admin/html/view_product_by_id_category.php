@@ -37,9 +37,6 @@ $test = mysqli_query($conn, $query4);
 
 $data = mysqli_fetch_assoc($test);
 
-
-
-
 }
 ?>
 
@@ -148,7 +145,7 @@ $data = mysqli_fetch_assoc($test);
             <!-- Basic Bootstrap Table -->
             <div class="card">
                 <div class="table-responsive text-nowrap">
-                    <table class="table">
+                    <table class="table" style="text-align: center;">
                         <thead>
                             <tr>
                                 <th>STT</th>
