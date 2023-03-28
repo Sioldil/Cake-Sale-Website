@@ -160,7 +160,7 @@ if (isset($_POST['submit'])) {
             </form>
             <form action="products_search.php" class="form-control" method="POST">
                 <input placeholder="tim kiem" name="search" type="text">
-                <input type="submit" name = "submit1">
+                <input class="btn btn-primary" type="submit" name = "submit1">
             </form>
             <!-- Basic Bootstrap Table -->
             <div class="card">

@@ -139,7 +139,7 @@ $Category = mysqli_query($conn, $query3);
       </form>
       <form action="products_search.php" class="form-control" method="POST">
         <input placeholder="tim kiem" name="search" type="text">
-       <input type="submit" name = "submit">
+       <input class="btn btn-primary" type="submit" name = "submit">
       </form>
       <!-- Basic Bootstrap Table -->
       <div class="card">
