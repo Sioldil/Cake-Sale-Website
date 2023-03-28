@@ -35,7 +35,7 @@ if (isset($_GET['id'])) {
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="breadcrumb__text">
-                    <h2>Chi tiết sản phẩm</h2>
+                    <h2>Products Details</h2>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -64,12 +64,12 @@ if (isset($_GET['id'])) {
                 <form action="cart.php" method="GET">
                     <div class="product__details__text">
                         <h4><?php echo $product['Name'] ?></h4>
-                        <h5>Giá: <?php echo $product['SellPrice'] ?></h5>
+                        <h5>Price: <?php echo $product['SellPrice'] ?></h5>
                         <p><?php echo $product['Description'] ?></p>
                         <ul>
-                            <li>Số lượng: <span><?php echo $product['Quantity'] ?></span></li>
-                            <li>Loại bánh: <span><?php echo $product['CategoryName'] ?></span></li>
-                            <li>Thương hiệu: <span><?php echo $product['BrandName'] ?></span></li>
+                            <li>Quantity: <span><?php echo $product['Quantity'] ?></span></li>
+                            <li>Category: <span><?php echo $product['CategoryName'] ?></span></li>
+                            <li>Brand: <span><?php echo $product['BrandName'] ?></span></li>
                         </ul>
                         <div class="product__details__option">
                             <div class="quantity">
@@ -79,10 +79,7 @@ if (isset($_GET['id'])) {
                                 </div>
                             </div>
                           <p>
-                          <button style="color: white" type="submit" class="btn primary-btn">Thêm giỏ hàng</button>
-                          <button class="heart__btn"type="submit" class="btn primary-btn">
-                            <span style="color:#F08632; border: 1px solid" class="icon_heart_alt"></span>
-                          </button>
+                          <button style="color: white" type="submit" class="btn primary-btn">Add to Cart</button>
                         </p>
                         </div>
                     </div>
@@ -97,7 +94,7 @@ if (isset($_GET['id'])) {
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="section-title">
-                    <h2>Sản phẩm tương tự</h2>
+                    <h2>Similar Product</h2>
                 </div>
             </div>
         </div>
@@ -120,7 +117,7 @@ if (isset($_GET['id'])) {
                                 <h5>Giá <?php echo $value['SellPrice'] . ' $USD' ?></h5>
                                 <div>
                                     <button class="btn primary-btn mt-4">
-                                        <a style="color: white" href="cart.php?id=<?php echo $value['ProductId']?>">Thêm giỏ hàng</a>
+                                        <a style="color: white" href="cart.php?id=<?php echo $value['ProductId']?>">Add to Cart</a>
                                     </button>
                                 </div>
                             </div>

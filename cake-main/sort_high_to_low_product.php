@@ -39,7 +39,7 @@ $Category = mysqli_query($conn, $query1);
                     <div class="shop__option__search">
                         <form action="search_product.php" method="POST">
                             <select name="id_category" id="id_category" onchange="location = this.value;">
-                                <option value="">Loại bánh</option>
+                                <option value="">Category</option>
                                 <?php foreach ($Category as $key => $value) { ?>
                                     <option value='list_product_by_category.php?id=<?php echo $value["CategoryId"] ?>'>
                                         <?php echo $value["CategoryName"] ?>
@@ -47,7 +47,7 @@ $Category = mysqli_query($conn, $query1);
                                 <?php } ?>
                             </select>
                                 <input type="text" name="search" class="form-control rounded" placeholder="Search"/>
-                                <button class="btn btn-primary" type ="submit" name="submit">Tìm Kiếm</button>
+                                <button class="btn btn-primary" type ="submit" name="submit">Search</button>
                         </form>
                     </div>
 
@@ -77,10 +77,10 @@ $Category = mysqli_query($conn, $query1);
                         </div>
                         <div class="product__item__text">
                             <h6> <a href="product_detail.php?id=<?php echo $value['ProductId'] ?>"><?php echo $value['Name'] ?></a></h6>
-                            <h5>Giá <?php echo $value['SellPrice'] . ' $USD' ?></h5>
+                            <h5>Price <?php echo $value['SellPrice'] . ' $USD' ?></h5>
                             <div>
                                 <button class="btn primary-btn mt-4">
-                                    <a style="color: white" href="cart.php?id=<?php echo $value['ProductId'] ?>">Thêm giỏ hàng</a>
+                                    <a style="color: white" href="cart.php?id=<?php echo $value['ProductId'] ?>">Add to Cart</a>
                                 </button>
                             </div>
                         </div>

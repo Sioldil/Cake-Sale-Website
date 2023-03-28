@@ -125,18 +125,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <form action="contact_add.php" method="POST">
                     <div class="row">
                     <div class="col-lg-6">
-                                <label class="form-label" for="name">Tên người dùng</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Nguyễn Văn A" required />
+                                <label class="form-label" for="name">UserName</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Nguyen Van A" required />
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label" for="email">Email</label>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="abc@gmail.com" required />
                             </div>
                             <div class="col-lg-12">
-                                <label class="form-label" for="message">Nội dung</label>
-                                <input type="text" class="form-control" id="message" name="message" placeholder="Nội dung" required />
+                                <label class="form-label" for="message">Conntent</label>
+                                <input type="text" class="form-control" id="message" name="message" placeholder="Message" required />
                             </div>
-                            <button type="submit" class="btn btn-primary">Gửi</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
                 </div>

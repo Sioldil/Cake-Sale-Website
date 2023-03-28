@@ -36,7 +36,7 @@
 
 
 $query = "SELECT o.OderId, o.number_phone, o.order_date, o.note, o.address, c.Fullname, o.total_price, o.status
-          FROM oders o, Customers c where o.CustomerId = c.CustomerId and o.status = 0 order by o.order_date DESC";
+          FROM oders o, Customers c where o.CustomerId = c.CustomerId and o.status = 0 order by o.order_date DESC limit 5";
 
 $Orders = mysqli_query($conn, $query);
 
