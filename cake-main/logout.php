@@ -12,7 +12,6 @@
     $query = mysqli_query($conn, $sql);
 
     unset($_SESSION['user']);
-    session_destroy();
 
     header('Location:login.php');
 ?>

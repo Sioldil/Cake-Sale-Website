@@ -15,7 +15,7 @@ if (isset($_GET['id'])) {
     $product = mysqli_fetch_assoc($data);
 
     //Hiển thị sản phẩm tương tự
-    $query1 = "SELECT *from products where status = 1";
+    $query1 = "SELECT *from products where status = 1 and is_accept = 1";
     $data1 = mysqli_query($conn, $query1);
 
 

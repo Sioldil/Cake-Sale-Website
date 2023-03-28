@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include($_SERVER["DOCUMENT_ROOT"] . '/admin/inc/header.php');
 include($_SERVER['DOCUMENT_ROOT'] . "/admin/inc/navbar.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
@@ -16,7 +17,7 @@ if (isset($_GET['id'])) {
     $customer = mysqli_fetch_assoc($custommer_query);
 
     $products_query = "SELECT a.Quantity, a.Price, p.Image, p.Name  FROM orderdetails a, products p, oders o 
-                where a.ProductId = p.ProductId and  o.OderId = '$id_order'";
+                where a.ProductId = p.ProductId  and a.Order_Detail_Id = o.OderId and o.OderId = '$id_order'";
     $products = mysqli_query($conn, $products_query);
 
     if (isset($_POST['submit'])) {
@@ -24,13 +25,12 @@ if (isset($_GET['id'])) {
         $query = "UPDATE oders set status = '$status' WHERE  OderId = '$id_order'";
         $result = mysqli_query($conn, $query);
         if ($result) {
-            header("Location: order_list.php");
+            header("location: order_list.php");
         } else {
             echo "xảy ra lỗi";
         }
     }
 }
-
 
 ?>
 <div class="layout-page">
@@ -189,14 +189,14 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
             <form method="POST">
-                <div class="form-group">
+                <div class="form-group mt-4">
                     <select name="status" id="" required>
                         <option name="status" value="0">Chưa xử lý</option>
                         <option name="status" value="1">Đang xử lý</option>
                         <option name="status" value="2">Đã xử lý</option>
                     </select>
                 </div>
-                <button class="btn btn-primary" type="submit" name="submit">Cập nhật</button>
+                <button class="mt-4 btn btn-primary" type="submit" name="submit">Cập nhật</button>
             </form>
         </div>
     </div>

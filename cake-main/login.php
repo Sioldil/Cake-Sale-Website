@@ -49,13 +49,16 @@
                         <div class="class__sidebar">
                         <h5 style="font-family: Callephane; margin-left: 200px;"><img src="img/logo_2.png" alt="">Login</h5>
                         <form method="POST">
-                            <input type="text" placeholder="Enter your email" name="Email">
+                            <input required type="text" placeholder="Enter your email" name="Email">
                             <span  class="mt-4 mb-4"><?php echo (isset($err['Email']))? $err['Email'] : ''; ?></span>
                             
-                            <input type="password" placeholder="*******" name="Password">
+                            <input required type="password" placeholder="*******" name="Password">
                             <span class="mb-4"><?php echo (isset($err['Password']))? $err['Password'] : ''; ?></span>
 
                             <button type="submit" name="submit" class="site-btn">Login</button>
+                            <button class="site-btn mt-4">
+                                <a style="color:while" href="register.php">Register</a>
+                            </button>
                         </form>
                     </div>
                     </div>

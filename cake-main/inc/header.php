@@ -1,6 +1,6 @@
 <?php
 session_start();
-include($_SERVER['DOCUMENT_ROOT'] . "/lib/user_session.php");
+error_reporting(0);
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
 $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
@@ -93,28 +93,25 @@ $user = ((isset($_SESSION['user']))) ? $_SESSION['user'] : [];
                                 <a href="./index.html"><img src="img/logo.png" alt=""></a>
                             </div>
                             <div class="header__top__right">
-                                <div class="header__top__right__links">
-                                    <ul class="nav navbar-nav navbar-right">
-                                        <?php if (isset($user['Email'])) { ?>
-                                            <div class="dropdown show">
-                                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <?php echo $user['Fullname'] ?>
-                                                </a>
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="register.php">Đăng Ký</a></li>
-                                                    <li><a href="login.php">Đăng Nhập</a></li>
-                                                </ul>
-                                            </div>
-                                        <?php } else { ?>
-                                            <li class="dropdown">
-                                                <span>Tài Khoản</span>
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="register.php">Đăng Ký</a></li>
-                                                    <li><a href="login.php">Đăng Nhập</a></li>
+                                
+                                <div class="header__top__left">
+                                <ul style="margin-right: 30px;">
+                                <?php if (isset($user['Email'])) { ?>
+                                    <li><?php echo $user['Fullname'] ?>
+                                            <ul>
+                                                <li>Setting</li>
+                                                <li><a style="color:#ffffff; white-space: nowrap;" href="history_order.php">Last Order</a></li>
+                                                <li><a style="color:#ffffff; white-space: nowrap;" href="logout.php">Log out</a></li>
+                                            </ul>
+                                    </li><?php } else { ?><li>
+                                                Tài Khoản
+                                                <ul>
+                                                    <li><a href="register.php" style="color:#ffffff; white-space: nowrap;">Đăng Ký</a></li>
+                                                    <li><a href="login.php" style="color:#ffffff; white-space: nowrap;">Đăng Nhập</a></li>
                                                 </ul>
                                             </li>
                                         <?php } ?>
-                                    </ul>
+                                </ul>
                                 </div>
                                 <div class="header__top__right__cart">
                                     <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
@@ -144,8 +141,8 @@ $user = ((isset($_SESSION['user']))) ? $_SESSION['user'] : [];
                                     <li><a href="./blog-details.html">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                          
+                            <li><a href="./contact_add.php">Contact</a></li>
                         </ul>
                     </nav>
                 </div>

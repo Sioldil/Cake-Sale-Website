@@ -5,9 +5,8 @@
       $id = $_GET['id'];
     }
 
-    $query = "DELETE FROM Products WHERE ProductId = $id";
+    $query = "UPDATE Products SET is_accept = 0 WHERE ProductId = $id";
     $delete = mysqli_query($conn, $query);
-    
     if($delete){
         header('location: product_list.php');
     }else{
