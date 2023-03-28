@@ -1,11 +1,9 @@
 <?php
 include($_SERVER['DOCUMENT_ROOT'] . "/cake-main/inc/header.php");
-
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
-$query = "SELECT *FROM Products where status = 1 and is_accept = 1 order by CountView desc";
+$query = "SELECT *FROM Products where status = 1 and is_accept = 1 order by CountView DESC ";
 $Products = mysqli_query($conn, $query);
-
 
 $query1 = "SELECT *FROM Category where status = 1";
 $Category = mysqli_query($conn, $query1);
@@ -39,7 +37,7 @@ $Category = mysqli_query($conn, $query1);
             <div class="row">
                 <div class="col-lg-7 col-md-7">
                     <div class="shop__option__search">
-                        <form action="search_product.php" method="GET">
+                        <form action="search_product.php" method="POST">
                             <select name="id_category" id="id_category" onchange="location = this.value;">
                                 <option value="">Loại bánh</option>
                                 <?php foreach ($Category as $key => $value) { ?>
@@ -48,31 +46,20 @@ $Category = mysqli_query($conn, $query1);
                                     </option>
                                 <?php } ?>
                             </select>
-                                <input type="text" name="key" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                                <button type="button"  name="search" class="btn btn-outline-primary">Tìm kiếm
-                                </button>
+                                <input type="text" name="search" class="form-control rounded" placeholder="Search"/>
+                                <button class="btn btn-primary" type ="submit" name="submit">Tìm Kiếm</button>
                         </form>
                     </div>
 
                 </div>
                 <div class="col-lg-5 col-md-5">
                     <div class="shop__option__right">
-                        <select style="display: none;">
-                            <option value="">Default sorting</option>
-                            <option value="">A to Z</option>
-                            <option value="">1 - 8</option>
+                        <select style="display: none;" onchange="document.location.href=this.value">
+                            <option value="">Price sorting</option>
+                            <option value="sort_high_to_low_product.php">High to Low</option>
+                            <option value="sort_low_to_high_product.php">Low to High</option>
                             <option value="">Name</option>
                         </select>
-                        <div class="nice-select" tabindex="0"><span class="current">Default sorting</span>
-                            <ul class="list">
-                                <li data-value="" class="option selected">Default sorting</li>
-                                <li data-value="" class="option">A to Z</li>
-                                <li data-value="" class="option">1 - 8</li>
-                                <li data-value="" class="option">Name</li>
-                            </ul>
-                        </div>
-                        <a href="#"><i class="fa fa-list"></i></a>
-                        <a href="#"><i class="fa fa-reorder"></i></a>
                     </div>
                 </div>
             </div>
