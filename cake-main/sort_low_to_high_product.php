@@ -77,10 +77,10 @@ $Category = mysqli_query($conn, $query1);
                         </div>
                         <div class="product__item__text">
                             <h6> <a href="product_detail.php?id=<?php echo $value['ProductId'] ?>"><?php echo $value['Name'] ?></a></h6>
-                            <h5>Giá <?php echo $value['SellPrice'] . ' $USD' ?></h5>
+                            <h5>Price <?php echo $value['SellPrice'] . ' $USD' ?></h5>
                             <div>
                                 <button class="btn primary-btn mt-4">
-                                    <a style="color: white" href="cart.php?id=<?php echo $value['ProductId'] ?>">Thêm giỏ hàng</a>
+                                    <a style="color: white" href="cart.php?id=<?php echo $value['ProductId'] ?>">Add to Cart</a>
                                 </button>
                             </div>
                         </div>

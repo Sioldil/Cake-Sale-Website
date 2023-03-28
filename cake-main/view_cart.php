@@ -15,7 +15,7 @@ $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="breadcrumb__text">
-                    <h2>Giỏ Hàng</h2>
+                    <h2>View Cart</h2>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -38,12 +38,12 @@ $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
             <thead>
               <tr>
                 <th>STT</th>
-                <th>Tên sản phẩm</th>
-                <th>Hình ảnh</th>
-                <th>Số lượng</th>
-                <th>Đơn giá</th>
-                <th>Thành tiền</th>
-                <th>Chức năng</th>
+                <th>Product Name</th>
+                <th>Image</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Into Money</th>
+                <th></th>
               </tr>
             </thead>
             <tbody class="table-border-bottom-0">
@@ -64,26 +64,26 @@ $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
                         <input type="hidden" name="action" value="update">
                         <input type="hidden" name="id" value="<?php echo $value['id'] ?>">
                         <input  type="text" style="width: 10" name="quantity" value="<?php echo $value['quantity']?>">
-                        <button class="btn btn-primary" type="submit">Cập nhật</button>
+                        <button class="btn btn-primary" type="submit">Update</button>
                     </form>
                     </td>
                     <td><?php echo $value['sellprice']?></td>
                     <td><?php echo $value['sellprice']  * $value['quantity']?> USD</td>
                   <td>
                     <button type="button" class="btn btn-danger">
-                      <a style="color: white" ; href="cart.php?id=<?php echo $value['id']?>&action=delete" onclick="return confirm('Bạn có chắc chắn xóa ?')">Xóa</a>
+                      <a style="color: white" ; href="cart.php?id=<?php echo $value['id']?>&action=delete" onclick="return confirm('You are want delete ?')">Delete</a>
                     </button>
                   </td>
                 </tr>
               <?php endforeach; ?>
               <tr>
-                <td>Tổng tiền</td>
+                <td>Total: </td>
                 <td colspan="6" class="text-center bg-infor"><?php echo $total_price ?> usd</td>
               </tr>
             </tbody> 
           </table>
           <button class="btn btn-success">
-            <a style="color: white;" href="checkout.php">Thanh toán</a>
+            <a style="color: white;" href="checkout.php">Check Out</a>
           </button>
          
         </div>
