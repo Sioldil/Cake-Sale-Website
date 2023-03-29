@@ -104,10 +104,10 @@ $user = ((isset($_SESSION['user']))) ? $_SESSION['user'] : [];
                                                 <li><a style="color:#ffffff; white-space: nowrap;" href="logout.php">Log out</a></li>
                                             </ul>
                                     </li><?php } else { ?><li>
-                                                Tài Khoản
+                                                Account
                                                 <ul>
-                                                    <li><a href="register.php" style="color:#ffffff; white-space: nowrap;">Đăng Ký</a></li>
-                                                    <li><a href="login.php" style="color:#ffffff; white-space: nowrap;">Đăng Nhập</a></li>
+                                                    <li><a href="register.php" style="color:#ffffff; white-space: nowrap;">Register</a></li>
+                                                    <li><a href="login.php" style="color:#ffffff; white-space: nowrap;">Login</a></li>
                                                 </ul>
                                             </li>
                                         <?php } ?>

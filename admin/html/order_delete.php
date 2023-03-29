@@ -5,12 +5,17 @@
       $id = $_GET['id'];
     }
 
-    $query = " UPDATE Category SET status = 0 WHERE CategoryId = '$id'";
+    $query = "DELETE from  oders  WHERE OderId = $id";
     $delete = mysqli_query($conn, $query);
     
     if($delete){
-        header('location: category_list.php');
+        echo '<script language="javascript">';
+        echo 'alert("Đặt hàng thất bại!!!")';
+        echo '</script>';
+        header('location: order_list.php');
     }else{
         echo "xảy ra lỗi khi xóa";
     }
+
+
 ?>

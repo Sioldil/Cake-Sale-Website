@@ -49,7 +49,7 @@ if (isset($_GET['id'])) {
             <div class="row">
                 <div class="col-lg-7 col-md-7">
                     <div class="shop__option__search">
-                        <form action="" method="GET">
+                        <form action="search_product.php" method="POST">
                             <select name="id_category" id="id_category" onchange="location = this.value;">
                                 <option value=""><?php echo $data['CategoryName'] ?></option>
                                 <?php foreach ($Category as $key => $value) { ?>
@@ -58,29 +58,18 @@ if (isset($_GET['id'])) {
                                     </option>
                                 <?php } ?>
                             </select>
-                            <input type="text" placeholder="Search">
-                            <button type="submit"><i class="fa fa-search"></i></button>
+                            <input type="text" name="search" class="form-control rounded" placeholder="Search"/>
+                                <button class="btn btn-primary" type ="submit" name="submit">Search</button>
                         </form>
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-5">
-                    <div class="shop__option__right">
-                        <select style="display: none;">
-                            <option value="">Default sorting</option>
-                            <option value="">A to Z</option>
-                            <option value="">1 - 8</option>
-                            <option value="">Name</option>
+                <div class="shop__option__right">
+                        <select onchange="document.location.href=this.value">
+                            <option value="">Price sorting</option>
+                            <option value="sort_high_to_low_product.php">High to Low</option>
+                            <option value="sort_low_to_high_product.php">Low to High</option>
                         </select>
-                        <div class="nice-select" tabindex="0"><span class="current">Default sorting</span>
-                            <ul class="list">
-                                <li data-value="" class="option selected">Default sorting</li>
-                                <li data-value="" class="option">A to Z</li>
-                                <li data-value="" class="option">1 - 8</li>
-                                <li data-value="" class="option">Name</li>
-                            </ul>
-                        </div>
-                        <a href="#"><i class="fa fa-list"></i></a>
-                        <a href="#"><i class="fa fa-reorder"></i></a>
                     </div>
                 </div>
             </div>
@@ -99,10 +88,10 @@ if (isset($_GET['id'])) {
                         </div>
                         <div class="product__item__text">
                             <h6> <a href="product_detail.php?id=<?php echo $value['ProductId'] ?>"><?php echo $value['Name'] ?></a></h6>
-                            <h5>Giá <?php echo $value['SellPrice'] . ' $USD' ?></h5>
+                            <h5>Price <?php echo $value['SellPrice'] . ' $USD' ?></h5>
                             <div>
                                 <button class="btn primary-btn mt-4">
-                                    <a style="color: white" href="cart_add.php">Thêm giỏ hàng</a>
+                                    <a style="color: white" href="cart_add.php">Add to Cart</a>
                                 </button>
                             </div>
                         </div>

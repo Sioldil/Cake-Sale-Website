@@ -20,6 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <input type="text" placeholder="Enter your email" name="Email">
                             <input type="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" name="Password">
                             <button type="submit" class="site-btn">register</button>
+                            <button class="site-btn mt-4">
+                                <a style="color:while" href="login.php">Login</a>
+                            </button>
                         </form>
                     </div>
                     </div>

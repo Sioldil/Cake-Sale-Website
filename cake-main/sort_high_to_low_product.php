@@ -1,31 +1,10 @@
 <?php
-ob_start();
 include($_SERVER['DOCUMENT_ROOT'] . "/cake-main/inc/header.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
+$query = "SELECT *FROM Products where status = 1 and is_accept = 1 order by SellPrice DESC";
+$Products = mysqli_query($conn, $query);
 
-if (isset($_POST['submit'])) {
-    $search = $_POST['search'];
-    $query = "SELECT * FROM Products  where status = 1 and is_accept = 1 and Name like '%$search%' order by SellPrice DESC ";
-    $data = mysqli_query($conn, $query);
-    if(!$data){
-        echo '<script language="javascript">';
-        echo 'alert("Đặt hàng thất bại!!!")';
-        echo '</script>';
-        header("location: list_product.php");
-    }
-
-}else if(isset($_POST['submit1'])){
-    $search = $_POST['search'];
-    $query = "SELECT * FROM Products  where status = 1 and is_accept = 1 and Name like '%$search%' order by SellPrice DESC ";
-    $data = mysqli_query($conn, $query);
-    if(!$data){
-        echo '<script language="javascript">';
-        echo 'alert("Đặt hàng thất bại!!!")';
-        echo '</script>';
-        header("location: list_product.php");
-    }
-}
 $query1 = "SELECT *FROM Category where status = 1";
 $Category = mysqli_query($conn, $query1);
 
@@ -60,22 +39,22 @@ $Category = mysqli_query($conn, $query1);
                     <div class="shop__option__search">
                         <form action="search_product.php" method="POST">
                             <select name="id_category" id="id_category" onchange="location = this.value;">
-                                <option value="">Loại bánh</option>
+                                <option value="">Category</option>
                                 <?php foreach ($Category as $key => $value) { ?>
                                     <option value='list_product_by_category.php?id=<?php echo $value["CategoryId"] ?>'>
                                         <?php echo $value["CategoryName"] ?>
                                     </option>
                                 <?php } ?>
                             </select>
-                            <input type="text" name="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                            <button type="submit1" name="submit1" class="btn btn-outline-primary">Tìm kiếm</button>
+                                <input type="text" name="search" class="form-control rounded" placeholder="Search"/>
+                                <button class="btn btn-primary" type ="submit" name="submit">Search</button>
                         </form>
                     </div>
 
                 </div>
                 <div class="col-lg-5 col-md-5">
                     <div class="shop__option__right">
-                    <select onchange="document.location.href=this.value">
+                        <select onchange="document.location.href=this.value">
                             <option value="">Price sorting</option>
                             <option value="sort_high_to_low_product.php">High to Low</option>
                             <option value="sort_low_to_high_product.php">Low to High</option>
@@ -85,7 +64,7 @@ $Category = mysqli_query($conn, $query1);
             </div>
         </div>
         <div class="row">
-            <?php foreach ($data as $key => $value) : ?>
+            <?php foreach ($Products as $key => $value) : ?>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="product__item">
                         <div class="product__item__pic set-bg">
@@ -98,10 +77,10 @@ $Category = mysqli_query($conn, $query1);
                         </div>
                         <div class="product__item__text">
                             <h6> <a href="product_detail.php?id=<?php echo $value['ProductId'] ?>"><?php echo $value['Name'] ?></a></h6>
-                            <h5>Giá <?php echo $value['SellPrice'] . ' $USD' ?></h5>
+                            <h5>Price <?php echo $value['SellPrice'] . ' $USD' ?></h5>
                             <div>
                                 <button class="btn primary-btn mt-4">
-                                    <a style="color: white" href="cart.php?id=<?php echo $value['ProductId'] ?>">Thêm giỏ hàng</a>
+                                    <a style="color: white" href="cart.php?id=<?php echo $value['ProductId'] ?>">Add to Cart</a>
                                 </button>
                             </div>
                         </div>

@@ -2,7 +2,7 @@
 include($_SERVER['DOCUMENT_ROOT'] . "/cake-main/inc/header.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
 
-    $query = "SELECT *FROM Products where status = 1 order by CountView desc";
+    $query = "SELECT *FROM Products where status = 1 and is_accept = 1 order by CountView desc limit 8";
     $Products = mysqli_query($conn, $query);
 
 ?>
@@ -88,7 +88,7 @@ include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
     <div class="row">
         <div class="col-lg-6 col-md-6">
             <div class="section-title">
-                <span>Sản Phẩm Nổi Bật</span>
+                <span>HighLight Products</span>
             </div>
         </div>
     </div>
@@ -110,10 +110,10 @@ include($_SERVER['DOCUMENT_ROOT'] . "/database/connect.php");
                         </div>
                         <div class="product__item__text">
                             <h6> <a href="product_detail.php?id=<?php echo $value['ProductId'] ?>"><?php echo $value['Name'] ?></a></h6>
-                            <h5>Giá <?php echo $value['SellPrice'] . ' $USD' ?></h5>
+                            <h5>Price <?php echo $value['SellPrice'] . ' $USD' ?></h5>
                             <div>
                                 <button class="btn primary-btn mt-4">
-                                    <a style="color: white" href="cart.php?id=<?php echo $value['ProductId'] ?>">Thêm giỏ hàng</a>
+                                    <a style="color: white" href="cart.php?id=<?php echo $value['ProductId'] ?>">Add to Cart</a>
                                 </button>
                             </div>
                         </div>
