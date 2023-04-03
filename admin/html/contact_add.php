@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="col-xl">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <form action="contact_add.php" method="POST">
+                        <form action="contact_add.php" method="POST"> 
                             <div class="mb-3">
                                 <label class="form-label" for="name">Tên người dùng</label>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="Nguyễn Văn A" required />
