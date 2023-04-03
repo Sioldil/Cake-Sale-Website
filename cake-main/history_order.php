@@ -23,10 +23,10 @@ if(isset($_SESSION['user'])){
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="breadcrumb__text">
-                    <h2>Lịch Sử Mua Hàng</h2>
+                    <h2>Last Order</h2>
                 </div>
                 
-                <h4 class="mt-4"></h4>Trạng thái đơn hàng:
+                <h4 class="mt-4"></h4>Status Order:
                             <?php if ($order['status'] == 0) { ?>
                                 Chưa xử lý
                             <?php } else if ($order['status'] == 1) { ?>
@@ -58,12 +58,12 @@ if(isset($_SESSION['user'])){
             <thead>
               <tr>
                 <th>STT</th>
-                <th>Tên sản phẩm</th>
-                <th>Hình ảnh</th>
-                <th>Ngày đặt hàng</th>
-                <th>Số lượng</th>
-                <th>Đơn giá</th>
-                <th>Thành tiền</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Time Order</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Into Money</th>
               </tr>
             </thead>
             <tbody class="table-border-bottom-0">
@@ -86,7 +86,7 @@ if(isset($_SESSION['user'])){
                 </tr>
               <?php endforeach; ?>
               <tr>
-                <td>Tổng tiền</td>
+                <td>Total Money</td>
                 <td colspan="6" ><?php echo $total_price ?> usd</td>
               </tr>
             </tbody> 
@@ -97,8 +97,8 @@ if(isset($_SESSION['user'])){
     <?php } else { ?>
         <div class="alert alert-danger">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <strong>Vui lòng đăng nhập để xem lịch sử mua hàng</strong>
-            <a href="login.php">Đăng nhập</a>
+            <strong>Please login in  view Last Order</strong>
+            <a href="login.php">Login</a>
         </div>
     <?php } ?>
 </section>

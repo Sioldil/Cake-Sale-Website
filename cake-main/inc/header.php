@@ -114,8 +114,10 @@ $user = ((isset($_SESSION['user']))) ? $_SESSION['user'] : [];
                                 </ul>
                                 </div>
                                 <div class="header__top__right__cart">
-                                    <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
-                                    <div class="cart__price">(<?php echo count($cart) ?>)</div>
+                                    <a href="view_cart.php"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+                                    <div class="cart__price">(<?php echo count($cart) ?>)
+                                   
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -131,17 +133,8 @@ $user = ((isset($_SESSION['user']))) ? $_SESSION['user'] : [];
                         <ul>
                             <li class="active"><a href="./index.php">Home</a></li>
                             <li><a href="./list_product.php">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./wisslist.html">Wisslist</a></li>
-                                    <li><a href="./Class.html">Class</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
+                            <li><a href="./view_cart.php">View Cart</a>
                             </li>
-                          
                             <li><a href="./contact_add.php">Contact</a></li>
                         </ul>
                     </nav>
